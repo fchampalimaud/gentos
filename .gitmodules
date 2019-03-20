@@ -1,0 +1,6 @@
+[submodule "pyforms-web"]
+	path = pyforms-web
+	url = https://github.com/UmSenhorQualquer/pyforms-web.git
+[submodule "flydb"]
+	path = flydb
+	url = https://bitbucket.org/fchampalimaud/flydb.git
