@@ -1,6 +1,14 @@
 [submodule "pyforms-web"]
 	path = pyforms-web
-	url = https://github.com/UmSenhorQualquer/pyforms-web.git
+	url = git@github.com:UmSenhorQualquer/pyforms-web.git
+    branch = v4
 [submodule "flydb"]
 	path = flydb
-	url = https://bitbucket.org/fchampalimaud/flydb.git
+	url = git@bitbucket.org:fchampalimaud/flydb.git
+    branch = v2
+[submodule "fishdb"]
+	path = fishdb
+	url = git@bitbucket.org:fchampalimaud/fishdb.git
+[submodule "rodentdb"]
+	path = rodentdb
+	url = git@bitbucket.org:fchampalimaud/rodentdb.git
