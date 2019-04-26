@@ -1,0 +1,16 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[packages]
+fishdb = {editable = true,path = "./fishdb"}
+fly-db = {editable = true,path = "./flydb"}
+rodentdb = {editable = true,path = "./rodentdb"}
+
+[dev-packages]
+pip = "==19.0"
+black = "==19.3b0"
+
+[requires]
+python_version = "3.7"
