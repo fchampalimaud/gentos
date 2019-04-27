@@ -1,11 +1,11 @@
 SETTINGS_PRIORITY = 0
 
-PYFORMS_MODE = 'WEB'
+PYFORMS_MODE = "WEB"
 
 ORQUESTRA_REQUIREAUTH = True
 ORQUESTRA_SHOW_NO_MODULE_EXCEPTION = True
 
-ORQUESTRA_EXTRA_CSS_FILE = '/static/core.css'
+ORQUESTRA_EXTRA_CSS_FILE = "/static/core.css"
 
 ORQUESTRA_TITLE = """
 	<svg xmlns="http://www.w3.org/2000/svg" width="126px" viewBox="0 0 221 55.44">
