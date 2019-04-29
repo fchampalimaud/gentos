@@ -31,7 +31,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "flydb",
     "orquestra",
     "pyforms_web.web",
     "jfu",
@@ -47,6 +46,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.sites",
+    # "flydb",
 ]
 
 MIDDLEWARE = [
