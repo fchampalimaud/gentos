@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
     # local apps
-    "fishdb",
+    "fishdb.apps.FishDBConfig",
     # "flydb",
     "rodentdb",
 ]
