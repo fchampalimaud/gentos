@@ -31,14 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "orquestra",
-    "pyforms_web.web",
-    "jfu",
-    "sorl.thumbnail",
-    "allauth",
-    "allauth.account",
-    "allauth.socialaccount",
-    "allauth.socialaccount.providers.google",
+    # django apps
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -46,7 +39,19 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.sites",
+    # 3rd party apps
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
+    "jfu",
+    "orquestra",
+    "pyforms_web.web",
+    "sorl.thumbnail",
+    # local apps
+    "fishdb",
     # "flydb",
+    "rodentdb",
 ]
 
 MIDDLEWARE = [
