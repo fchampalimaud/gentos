@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "659c06ad1410fdd1886537976d23d4cec96440e7f9f894d67bd332213e38661f"
+            "sha256": "709169ae3469e4e868b67065804a1c96b42cd0a756246f6dadafc12bf9c24e7e"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -176,11 +176,8 @@
             "version": "==4.1.0.25"
         },
         "orquestra": {
-            "hashes": [
-                "sha256:16f16900cf8997416f440f605d0cff6f304c9ed5dbed2524e094fa45493a2aa9",
-                "sha256:c8e7f55b275c159caaef6e43ab41c12dfe06c26dd9e2716d9f581241870b9bee"
-            ],
-            "version": "==1.1"
+            "editable": true,
+            "path": "./pyforms-web/orquestra"
         },
         "pillow": {
             "hashes": [
