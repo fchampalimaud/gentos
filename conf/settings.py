@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     # local apps
     "fishdb.apps.FishDBConfig",
     # "flydb",
-    "rodentdb",
+    "rodentdb.apps.RodentDBConfig",
 ]
 
 MIDDLEWARE = [
