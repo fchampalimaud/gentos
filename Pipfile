@@ -7,6 +7,9 @@ verify_ssl = true
 fishdb = {editable = true,path = "./fishdb"}
 fly-db = {editable = true,path = "./flydb"}
 rodentdb = {editable = true,path = "./rodentdb"}
+pyforms-web = {editable = true,path = "./pyforms-web"}
+django-allauth = "*"
+mysqlclient = "*"
 
 [dev-packages]
 pip = "==19.0"
