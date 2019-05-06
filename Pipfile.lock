@@ -86,11 +86,11 @@
         },
         "fishdb": {
             "editable": true,
-            "path": "./fishdb"
+            "path": "./plugins/fishdb"
         },
         "fly-db": {
             "editable": true,
-            "path": "./flydb"
+            "path": "./plugins/flydb"
         },
         "idna": {
             "hashes": [
@@ -177,7 +177,7 @@
         },
         "orquestra": {
             "editable": true,
-            "path": "./pyforms-web/orquestra"
+            "path": "./libraries/pyforms-web/orquestra"
         },
         "pillow": {
             "hashes": [
@@ -212,7 +212,7 @@
         },
         "pyforms-web": {
             "editable": true,
-            "path": "./pyforms-web"
+            "path": "./libraries/pyforms-web"
         },
         "python-dateutil": {
             "hashes": [
@@ -251,7 +251,7 @@
         },
         "rodentdb": {
             "editable": true,
-            "path": "./rodentdb"
+            "path": "./plugins/rodentdb"
         },
         "simplejson": {
             "hashes": [

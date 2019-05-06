@@ -4,11 +4,11 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [packages]
-fishdb = {editable = true,path = "./fishdb"}
-fly-db = {editable = true,path = "./flydb"}
-rodentdb = {editable = true,path = "./rodentdb"}
-pyforms-web = {editable = true,path = "./pyforms-web"}
-orquestra = {editable = true,path = "./pyforms-web/orquestra"}
+fishdb = {editable = true,path = "./plugins/fishdb"}
+fly-db = {editable = true,path = "./plugins/flydb"}
+rodentdb = {editable = true,path = "./plugins/rodentdb"}
+pyforms-web = {editable = true,path = "./libraries/pyforms-web"}
+orquestra = {editable = true,path = "./libraries/pyforms-web/orquestra"}
 django-allauth = "*"
 mysqlclient = "*"
 
