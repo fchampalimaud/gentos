@@ -1,14 +1,14 @@
-[submodule "pyforms-web"]
-	path = pyforms-web
+[submodule "libraries/pyforms-web"]
+	path = libraries/pyforms-web
 	url = git@github.com:UmSenhorQualquer/pyforms-web.git
 	branch = v4
-[submodule "flydb"]
-	path = flydb
+[submodule "plugins/flydb"]
+	path = plugins/flydb
 	url = git@bitbucket.org:fchampalimaud/flydb.git
 	branch = v2
-[submodule "fishdb"]
-	path = fishdb
+[submodule "plugins/fishdb"]
+	path = plugins/fishdb
 	url = git@bitbucket.org:fchampalimaud/fishdb.git
-[submodule "rodentdb"]
-	path = rodentdb
+[submodule "plugins/rodentdb"]
+	path = plugins/rodentdb
 	url = git@bitbucket.org:fchampalimaud/rodentdb.git
