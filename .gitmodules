@@ -4,11 +4,11 @@
 	branch = v4
 [submodule "plugins/flydb"]
 	path = plugins/flydb
-	url = git@bitbucket.org:fchampalimaud/flydb.git
+	url = git@github.com:fchampalimaud/flydb.git
 	branch = v2
 [submodule "plugins/fishdb"]
 	path = plugins/fishdb
-	url = git@bitbucket.org:fchampalimaud/fishdb.git
+	url = git@github.com:fchampalimaud/fishdb.git
 [submodule "plugins/rodentdb"]
 	path = plugins/rodentdb
-	url = git@bitbucket.org:fchampalimaud/rodentdb.git
+	url = git@github.com:fchampalimaud/rodentdb.git
