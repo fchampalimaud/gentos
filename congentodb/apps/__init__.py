@@ -1,0 +1,1 @@
+from .rodents_list import RodentsListApp

@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'congentodb',
+    
     # django apps
     "django.contrib.admin",
     "django.contrib.auth",
@@ -97,7 +99,15 @@ DATABASES = {
         "PASSWORD": "123",
         "HOST": "localhost",
         "PORT": "3306",
-    }
+    },
+    'api': {
+        'ENGINE': 'rest_models.backend',
+        'NAME': 'http://localhost:8001/api',
+        'USER': 'admin.it',
+        'PASSWORD': '123',
+        'AUTH': 'rest_models.backend.auth.BasicAuth',
+        'PREVENT_DISTINCT': False,
+    },
 }
 
 # Password validation
@@ -151,3 +161,8 @@ STATICFILES_DIRS = (
 SITE_ID = 1  # Required for allauth module
 LOGIN_REDIRECT_URL = "/"
 ACCOUNT_EMAIL_REQUIRED = True
+
+
+DATABASE_ROUTERS = [
+    'rest_models.router.RestModelRouter',
+]
