@@ -2,10 +2,11 @@ from rodentdb.models import Rodent
 from fishdb.models import Zebrafish
 from flydb.models import Fly
 from django.dispatch import receiver
-from django.db.models.signals import post_save, post_delete
-from congentodb.models.rodent import Rodent as RemoteRodent
-from congentodb.models.fly import Fly as RemoteFly
-from congentodb.models.zebrafish import Zebrafish as RemoteZebrafish
+from django.db.models.signals import post_save, post_delete, pre_save
+from congentodb_client.models.rodent import Rodent as RemoteRodent
+from congentodb_client.models.fly import Fly as RemoteFly
+from congentodb_client.models.zebrafish import Zebrafish as RemoteZebrafish
+from django.contrib.auth.models import User
 
 ####################################################
 ### RODENT #########################################
@@ -166,3 +167,12 @@ def delete_remote_zebrafish(sender, instance, **kwargs):
         remote_obj.delete()
     except RemoteZebrafish.DoesNotExist:
         pass
+
+
+
+
+# set a new user inactive by default
+@receiver(pre_save, sender=User)
+def set_new_user_inactive(sender, instance, **kwargs):
+    if instance.pk is None and not instance.is_superuser:
+        instance.is_active = False

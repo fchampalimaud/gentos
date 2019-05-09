@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'congentodb',
+    'congentodb_client',
     
     # django apps
     "django.contrib.admin",
@@ -153,6 +153,7 @@ STATIC_URL = "/static/"
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static", "img"),
+    os.path.join(BASE_DIR, "static", "images"),
     os.path.join(BASE_DIR, "static", "css"),
     # os.path.join(BASE_DIR,'static', "js"),
 )
