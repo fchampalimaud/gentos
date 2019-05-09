@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'confirm_users',
     'congentodb_client',
     
     # django apps
