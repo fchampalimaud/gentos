@@ -164,7 +164,7 @@ STATICFILES_DIRS = (
 SITE_ID = 1  # Required for allauth module
 LOGIN_REDIRECT_URL = "/"
 ACCOUNT_EMAIL_REQUIRED = True
-
+#ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
 DATABASE_ROUTERS = [
     'rest_models.router.RestModelRouter',
