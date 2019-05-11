@@ -19,8 +19,7 @@ class Fly(models.Model):
     legacy2   = models.CharField('Legacy ID 2', max_length=30, blank=True, null=True)
     legacy3   = models.CharField('Legacy ID 3', max_length=30, blank=True, null=True)
     flydbid   = models.CharField('Fly DB ID', max_length=50, blank=True, null=True)
-    hospital  = models.BooleanField('Hospital')
-    died      = models.BooleanField('Died')
+
     genotype  = models.CharField('Genotype', max_length=255, blank=True, null=True)
 
     category = models.CharField('Category', max_length=255, blank=True, null=True)

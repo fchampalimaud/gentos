@@ -3,3 +3,5 @@
 #from .flies_list import FliesListApp
 
 from .links import CongentoDbLink
+
+from .sync_app import SyncApp
