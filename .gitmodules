@@ -21,3 +21,6 @@
 [submodule "plugins/confirm-users-app"]
 	path = plugins/confirm-users-app
 	url = git@github.com:fchampalimaud/confirm-users-app.git
+[submodule "plugins/notifications-central"]
+	path = plugins/notifications-central
+	url = git@github.com:fchampalimaud/notifications-central.git
