@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "709169ae3469e4e868b67065804a1c96b42cd0a756246f6dadafc12bf9c24e7e"
+            "sha256": "fddd0295180338a8716abe1dd2a688e5805521a1fa383b436e65b5d7641b494a"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -36,6 +36,10 @@
             ],
             "version": "==1.0.1"
         },
+        "confirm-users": {
+            "editable": true,
+            "path": "./plugins/confirm-users-app"
+        },
         "defusedxml": {
             "hashes": [
                 "sha256:6687150770438374ab581bb7a1b327a847dd9c5749e396102de3fad4e8a3ef93",
@@ -51,10 +55,10 @@
         },
         "django": {
             "hashes": [
-                "sha256:7c3543e4fb070d14e10926189a7fcf42ba919263b7473dceaefce34d54e8a119",
-                "sha256:a2814bffd1f007805b19194eb0b9a331933b82bd5da1c3ba3d7b7ba16e06dc4b"
+                "sha256:0fd54e4f27bc3e0b7054a11e6b3a18fa53f2373f6b2df8a22e8eadfe018970a5",
+                "sha256:f3b28084101d516f56104856761bc247f85a2a5bbd9da39d9f6197ff461b3ee4"
             ],
-            "version": "==2.2"
+            "version": "==2.1.8"
         },
         "django-allauth": {
             "hashes": [
@@ -76,6 +80,21 @@
                 "sha256:8cd377744aa45f9f131d652ec460c57d1aaa88d3e9b586c8e27eb709341b9084"
             ],
             "version": "==3.1.2"
+        },
+        "django-rest-models": {
+            "editable": true,
+            "path": "./libraries/django-rest-models"
+        },
+        "djangorestframework": {
+            "hashes": [
+                "sha256:1f6baf40ed456ed2af6bd1a4ff8bbc3503cebea16509993aea2b7085bc097766",
+                "sha256:9f9e94e8d22b100ed3a43cee8c47a7ff7b185e778a1f2da9ec5c73fc4e081b87"
+            ],
+            "version": "==3.7.7"
+        },
+        "dynamic-rest": {
+            "editable": true,
+            "path": "./libraries/dynamic-rest"
         },
         "filelock": {
             "hashes": [
@@ -99,6 +118,12 @@
             ],
             "version": "==2.8"
         },
+        "inflection": {
+            "hashes": [
+                "sha256:18ea7fb7a7d152853386523def08736aa8c32636b047ade55f7578c4edeb16ca"
+            ],
+            "version": "==0.3.1"
+        },
         "mysqlclient": {
             "hashes": [
                 "sha256:425e733b05e359a714d6007c0fc44582be66b63e5a3df0a50949274ae16f4bc6",
@@ -107,6 +132,10 @@
             ],
             "index": "pypi",
             "version": "==1.4.2.post1"
+        },
+        "notifications-central": {
+            "editable": true,
+            "path": "./plugins/notifications-central"
         },
         "numpy": {
             "hashes": [
@@ -284,19 +313,19 @@
             ],
             "version": "==12.5.0"
         },
-        "sqlparse": {
+        "unidecode": {
             "hashes": [
-                "sha256:40afe6b8d4b1117e7dff5504d7a8ce07d9a1b15aeeade8a2d10f130a834f8177",
-                "sha256:7c3dca29c022744e95b547e867cee89f4fce4373f3549ccd8797d8eb52cdb873"
+                "sha256:092cdf7ad9d1052c50313426a625b717dab52f7ac58f859e09ea020953b1ad8f",
+                "sha256:8b85354be8fd0c0e10adbf0675f6dc2310e56fda43fa8fe049123b6c475e52fb"
             ],
-            "version": "==0.3.0"
+            "version": "==1.0.23"
         },
         "urllib3": {
             "hashes": [
-                "sha256:4c291ca23bbb55c76518905869ef34bdd5f0e46af7afe6861e8375643ffee1a0",
-                "sha256:9a247273df709c4fedb38c711e44292304f73f39ab01beda9f6b9fc375669ac3"
+                "sha256:2393a695cd12afedd0dcb26fe5d50d0cf248e5a66f75dbd89a3d4eb333a61af4",
+                "sha256:a637e5fae88995b256e3409dc4d52c2e2e0ba32c42a6365fee8bbd2238de3cfb"
             ],
-            "version": "==1.24.2"
+            "version": "==1.24.3"
         }
     },
     "develop": {
