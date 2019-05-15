@@ -177,6 +177,17 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = "/static/"
 
 
+# E-mail
+
+EMAIL_HOST = os.getenv("EMAIL_HOST", default="localhost")
+EMAIL_PORT = os.getenv("EMAIL_PORT", default=1025)  # Used by MailHog
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", default="webmaster@localhost")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", default="")
+EMAIL_USE_TLS = not DEBUG
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_SUBJECT_PREFIX = "[CONGENTO] "
+SERVER_EMAIL = EMAIL_HOST_USER
 
 
 # django-allauth
