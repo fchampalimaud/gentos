@@ -4,6 +4,7 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [packages]
+django = "~=2.1.0"
 fishdb = {editable = true,path = "./plugins/fishdb"}
 fly-db = {editable = true,path = "./plugins/flydb"}
 rodentdb = {editable = true,path = "./plugins/rodentdb"}
@@ -13,11 +14,11 @@ notifications-central = {editable = true,path = "./plugins/notifications-central
 confirm-users = {editable = true,path = "./plugins/confirm-users-app"}
 dynamic-rest = {editable = true,path = "./libraries/dynamic-rest"}
 django-rest-models = {editable = true,path = "./libraries/django-rest-models"}
-django-allauth = "*"
 mysqlclient = "*"
+django-dotenv = "*"
 
 [dev-packages]
-pip = "==19.0"
+django-debug-toolbar = "*"
 black = "==19.3b0"
 
 [requires]
