@@ -1,0 +1,10 @@
+-i https://pypi.org/simple
+appdirs==1.4.3
+attrs==19.1.0
+black==19.3b0
+click==7.0
+django-debug-toolbar==1.11
+django==2.1.8
+pytz==2019.1
+sqlparse==0.3.0
+toml==0.10.0

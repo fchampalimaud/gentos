@@ -1,0 +1,39 @@
+-i https://pypi.org/simple
+-e ./libraries/django-rest-models
+-e ./libraries/dynamic-rest
+-e ./libraries/pyforms-web
+-e ./libraries/pyforms-web/orquestra
+-e ./plugins/confirm-users-app
+-e ./plugins/fishdb
+-e ./plugins/flydb
+-e ./plugins/notifications-central
+-e ./plugins/rodentdb
+certifi==2019.3.9
+chardet==3.0.4
+confapp==1.0.1
+defusedxml==0.6.0
+dill==0.2.9
+django-allauth==0.39.1
+django-dotenv==1.4.2
+django-jfu-pyforms==2.0.9.1
+django-model-utils==3.1.2
+django==2.1.8
+djangorestframework==3.7.7
+filelock==3.0.10
+idna==2.8
+inflection==0.3.1
+mysqlclient==1.4.2.post1
+numpy==1.16.3
+oauthlib==3.0.1
+opencv-python==4.1.0.25
+pillow==6.0.0
+python-dateutil==2.8.0
+python3-openid==3.1.0
+pytz==2019.1
+requests-oauthlib==1.2.0
+requests==2.21.0
+simplejson==3.16.0
+six==1.12.0
+sorl-thumbnail==12.5.0
+unidecode==1.0.23
+urllib3==1.24.3
