@@ -70,7 +70,7 @@ class MissedSync(models.Model):
         for user in User.objects.filter(is_superuser=True):
             notify(
                 'CONGENTODB_SYNC_ERROR',
-                'Unable to sync with the CongentoDb',
+                'Unable to sync with the Congento DB',
                 f'Unable to sync an object from the table [{self.contenttype}].',
                 user=user
             )

@@ -10,7 +10,7 @@ class ExternalLinkBaseWidget(BaseWidget):
 
 class CongentoDbLink(ExternalLinkBaseWidget):
     UID = 'congentodb-link'
-    TITLE = 'CongentoDb'
+    TITLE = 'Congento DB'
 
     ORQUESTRA_URL = 'https://congento.org/'
     ORQUESTRA_TARGET = '_blank'

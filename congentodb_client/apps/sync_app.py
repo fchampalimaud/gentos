@@ -8,7 +8,7 @@ class SyncApp(ModelAdminWidget):
 
     UID = 'sync-with-congentodb'
     MODEL = MissedSync
-    TITLE = 'Sync with CongentoDb'
+    TITLE = 'Sync with Congento DB'
 
 
     LIST_DISPLAY = ['contenttype', 'object_id', 'operation', 'created']
