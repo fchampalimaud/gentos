@@ -53,7 +53,12 @@ class MissedSync(models.Model):
                     remote_model = RemoteZebrafish
 
                 if remote_model is not None:
-                    remote_model.delete()
+                    try:
+                        remote_obj = remote_model.objects.get(remote_id=self.object_id)
+                    except remote_model.DoesNotExist:
+                        pass
+                    else:
+                        remote_obj.delete()
 
         self.committed = timezone.now()
         self.save()
