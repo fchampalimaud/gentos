@@ -1,9 +1,14 @@
 #!/usr/bin/env python
+"""Django's command-line utility for administrative tasks."""
 import os
 import sys
 
-if __name__ == "__main__":
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "conf.settings")
+import dotenv
+
+
+def main():
+    dotenv.read_dotenv()
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'conf.settings')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
@@ -13,3 +18,7 @@ if __name__ == "__main__":
             "forget to activate a virtual environment?"
         ) from exc
     execute_from_command_line(sys.argv)
+
+
+if __name__ == '__main__':
+    main()

@@ -20,13 +20,24 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "54ux$vs655p1138x!h(%s)rt(6fziv7n$)1qgahd3(5rj@-r*@"
+SECRET_KEY = os.getenv("SECRET_KEY", "changeme!")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG", False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    hostname for hostname in os.getenv("ALLOWED_HOSTS", "localhost").split(",")
+]
 
+ADMINS = [
+    tuple(admin.split(",")) for admin in os.getenv("ADMINS", "").split(";") if admin
+]
+
+MANAGERS = [
+    tuple(manager.split(","))
+    for manager in os.getenv("MANAGERS", "").split(";")
+    if manager
+] or ADMINS
 
 # Application definition
 
@@ -96,17 +107,17 @@ WSGI_APPLICATION = "conf.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "congento",
-        "USER": "root",
-        "PASSWORD": "123",
-        "HOST": "localhost",
-        "PORT": "3306",
+        "NAME": os.getenv("DATABASE_NAME"),
+        "USER": os.getenv("DATABASE_USERNAME"),
+        "PASSWORD": os.getenv("DATABASE_PASSWORD"),
+        "HOST": os.getenv("DATABASE_HOST", default="localhost"),
+        "PORT": os.getenv("DATABASE_PORT", default=3306),
     },
     'api': {
         'ENGINE': 'rest_models.backend',
-        'NAME': 'http://localhost:8001/api',
-        'USER': 'admin.it',
-        'PASSWORD': '123',
+        "NAME": os.getenv("DATABASE_NAME"),
+        "USER": os.getenv("DATABASE_USERNAME"),
+        "PASSWORD": os.getenv("DATABASE_PASSWORD"),
         'AUTH': 'rest_models.backend.auth.BasicAuth',
         'PREVENT_DISTINCT': False,
     },
