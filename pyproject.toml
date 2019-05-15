@@ -1,8 +1,6 @@
 [tool.black]
 exclude = '''
     /migrations/
-    | pyforms-web/
-    | flydb/
-    | fishdb/
-    | rodentdb/
+    | libraries/
+    | plugins/
 '''
