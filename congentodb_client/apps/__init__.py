@@ -1,7 +1,15 @@
-#from .rodents_list import RodentsListApp
-#from .zebrafish_list import ZebrafishListApp
-#from .flies_list import FliesListApp
+from django.apps import AppConfig
 
-from .links import CongentoDbLink
 
-from .sync_app import SyncApp
+class CongentoDBConfig(AppConfig):
+    name = "congentodb_client"
+    verbose_name = "Congento DB Client"
+
+    def ready(self):
+        from .. import signals  # noqa
+
+        from .links import CongentoDbLink
+        from .sync_app import SyncApp
+
+        global CongentoDbLink
+        global SyncApp
