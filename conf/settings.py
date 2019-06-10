@@ -44,6 +44,7 @@ MANAGERS = [
 INSTALLED_APPS = [
     # local apps
     "congentodb_client.apps.CongentoDBConfig",
+    "users.apps.UsersConfig",
     # 3rd party apps
     "fishdb.apps.FishDBConfig",
     "flydb",
