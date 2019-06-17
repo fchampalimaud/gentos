@@ -31,7 +31,7 @@ class Institution(models.Model):
 
 
 class DatabaseAccess(models.Model):
-    group = models.ForeignKey(to="users.Group", on_delete=models.CASCADE)
+    group = models.ForeignKey(to="users.Group", on_delete=models.CASCADE, related_name='accesses')
     db = models.CharField(max_length=10, choices=get_installed_dbs())
     is_staff = models.BooleanField(
         "staff status",
