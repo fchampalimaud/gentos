@@ -43,14 +43,14 @@ MANAGERS = [
 
 INSTALLED_APPS = [
     # local apps
-    "congentodb_client.apps.CongentoDBConfig",
+    # "congentodb_client.apps.CongentoDBConfig",
     "users.apps.UsersConfig",
     # 3rd party apps
     "fishdb.apps.FishDBConfig",
-    "flydb",
+    "flydb.apps.FlyDBConfig",
     "rodentdb.apps.RodentDBConfig",
-    "confirm_users",
-    "notifications",
+    # "confirm_users",
+    # "notifications",
     "orquestra",
     "pyforms_web.web",
     "jfu",
