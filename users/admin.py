@@ -8,13 +8,19 @@ class InstitutionAdmin(admin.ModelAdmin):
     ...
 
 
+class DatabaseInline(admin.TabularInline):
+    model = models.DatabaseAccess
+    extra = 0
+
+
 class MembershipInline(admin.TabularInline):
     model = models.Membership
+    extra = 0
 
 
 @admin.register(models.Group)
 class GroupAdmin(admin.ModelAdmin):
-    inlines = [MembershipInline]
+    inlines = [DatabaseInline, MembershipInline]
 
 
 @admin.register(models.Membership)

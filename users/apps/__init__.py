@@ -8,5 +8,7 @@ class UsersConfig(AppConfig):
         from .. import signals  # noqa
 
         from .users import UsersListApp
+        from .groups import GroupsListApp
 
         global UsersListApp
+        global GroupsListApp
