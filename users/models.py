@@ -45,6 +45,7 @@ class DatabaseAccess(models.Model):
 
 class Group(models.Model):
     name = models.CharField(max_length=150, unique=True)
+    email = models.EmailField(blank=True)
     institution = models.ForeignKey(to="Institution", on_delete=models.CASCADE)
     users = models.ManyToManyField(to=settings.AUTH_USER_MODEL, through="Membership")
 
