@@ -3,6 +3,7 @@ from django.conf import settings
 
 # from django.contrib.auth.models import AbstractUser
 from django.db import models
+from model_utils import Choices
 
 
 def get_installed_dbs():
@@ -31,12 +32,23 @@ class Institution(models.Model):
 
 
 class DatabaseAccess(models.Model):
+    ACCESS_LEVELS = Choices(
+        ('admin', "Group members can manage all entries"),
+        ('basic', "Group members can add and edit/remove their entries only"),
+        ('view', "Group members can only view"),
+    )
+
     group = models.ForeignKey(to="users.Group", on_delete=models.CASCADE, related_name='accesses')
-    db = models.CharField(max_length=10, choices=get_installed_dbs())
-    is_staff = models.BooleanField(
-        "staff status",
-        default=False,
-        help_text="Designates whether the group can manage this DB.",
+    db = models.CharField(
+        verbose_name="database",
+        max_length=10,
+        choices=get_installed_dbs(),
+    )
+    level = models.CharField(
+        verbose_name="access level",
+        max_length=6,
+        choices=ACCESS_LEVELS,
+        default=ACCESS_LEVELS.basic,
     )
 
     class Meta:
