@@ -1,9 +1,34 @@
 from confapp import conf
-# from django.contrib.auth import get_user_model
 from pyforms_web.widgets.django import ModelAdminWidget
+from pyforms_web.widgets.django import ModelFormWidget
 
-# User = get_user_model()
 from users.models import Group
+from users.models import Membership
+
+
+class MembershipInline(ModelAdminWidget):
+    MODEL = Membership
+
+    LIST_DISPLAY = ["user", "is_responsible", "is_manager"]
+
+
+class GroupForm(ModelFormWidget):
+    FIELDSETS = [
+        ("name", "institution"),
+        " ",
+        "MembershipInline",
+    ]
+
+    INLINES = [MembershipInline]
+
+    LAYOUT_POSITION = conf.ORQUESTRA_NEW_TAB
+
+    @property
+    def title(self):
+        try:
+            return self.model_object.name
+        except AttributeError:
+            pass  # apparently it defaults to App TITLE
 
 
 class GroupsListApp(ModelAdminWidget):
@@ -14,7 +39,9 @@ class GroupsListApp(ModelAdminWidget):
 
     AUTHORIZED_GROUPS = ['superuser']
 
-    # LIST_DISPLAY = ['email', 'is_active', 'is_staff', 'is_superuser']
+    EDITFORM_CLASS = GroupForm
+
+    USE_DETAILS_TO_EDIT = False  # required to have form in NEW_TAB
 
     LAYOUT_POSITION = conf.ORQUESTRA_HOME
     ORQUESTRA_MENU = "middle-left"
