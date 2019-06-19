@@ -16,11 +16,11 @@ class MembershipInline(ModelAdminWidget):
 
 class UserForm(ModelFormWidget):
     FIELDSETS = [
-        "username",
-        "email",
-        "first_name",
-        "last_name",
+        ("username", "email"),
+        ("first_name", "last_name"),
+        " ",
         "is_active",
+        " ",
         "MembershipInline",
     ]
 
