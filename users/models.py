@@ -40,6 +40,8 @@ class DatabaseAccess(models.Model):
     )
 
     class Meta:
+        verbose_name = "database access"
+        verbose_name_plural = "database accesses"
         unique_together = ("group", "db")
 
 
