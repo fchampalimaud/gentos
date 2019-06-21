@@ -3,7 +3,7 @@ import logging
 from django.apps import apps
 from django.conf import settings
 
-# from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from model_utils import Choices
 
@@ -21,8 +21,8 @@ def get_installed_dbs():
             yield (app_config.label, app_config.verbose_name)
 
 
-# class User(AbstractUser):
-#     ...
+class User(AbstractUser):
+    ...
 
 
 class Institution(models.Model):
@@ -90,7 +90,9 @@ class Group(models.Model):
 
 class Membership(models.Model):
     user = models.ForeignKey(
-        to="auth.User", on_delete=models.CASCADE, related_name="memberships"
+        to=settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="memberships",
     )
     group = models.ForeignKey(
         to="Group", on_delete=models.CASCADE, related_name="memberships"
