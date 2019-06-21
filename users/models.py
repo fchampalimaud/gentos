@@ -1,3 +1,5 @@
+import logging
+
 from django.apps import apps
 from django.conf import settings
 
@@ -6,12 +8,15 @@ from django.db import models
 from model_utils import Choices
 
 
+logger = logging.getLogger(__name__)
+
+
 def get_installed_dbs():
     for app_label in ("fishdb", "flydb", "rodentdb"):
         try:
             app_config = apps.get_app_config(app_label)
         except LookupError:
-            pass
+            logger.warning("Could not find app_config for '%s'", app_label)
         else:
             yield (app_config.label, app_config.verbose_name)
 
