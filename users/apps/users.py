@@ -44,11 +44,11 @@ class UsersListApp(ModelAdminWidget):
     MODEL = User
     TITLE = "Users"
 
-    AUTHORIZED_GROUPS = ['superuser']
+    AUTHORIZED_GROUPS = ["superuser"]
 
     EDITFORM_CLASS = UserForm
 
-    LIST_DISPLAY = ['get_full_name', 'email', 'is_active', 'is_staff', 'is_superuser']
+    LIST_DISPLAY = ["get_full_name", "email", "is_active", "is_staff", "is_superuser"]
 
     USE_DETAILS_TO_EDIT = False  # required to have form in NEW_TAB
 

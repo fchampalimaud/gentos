@@ -38,16 +38,16 @@ class Institution(models.Model):
 
 class DatabaseAccess(models.Model):
     ACCESS_LEVELS = Choices(
-        ('admin', "Group members can manage all entries"),
-        ('basic', "Group members can only manage their own entries"),
-        ('view', "Group members can only view"),
+        ("admin", "Group members can manage all entries"),
+        ("basic", "Group members can only manage their own entries"),
+        ("view", "Group members can only view"),
     )
 
-    group = models.ForeignKey(to="users.Group", on_delete=models.CASCADE, related_name='accesses')
+    group = models.ForeignKey(
+        to="users.Group", on_delete=models.CASCADE, related_name="accesses"
+    )
     db = models.CharField(
-        verbose_name="database",
-        max_length=10,
-        choices=get_installed_dbs(),
+        verbose_name="database", max_length=10, choices=get_installed_dbs()
     )
     level = models.CharField(
         verbose_name="access level",

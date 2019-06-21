@@ -37,7 +37,7 @@ class GroupsListApp(ModelAdminWidget):
     MODEL = Group
     TITLE = "Groups"
 
-    AUTHORIZED_GROUPS = ['superuser']
+    AUTHORIZED_GROUPS = ["superuser"]
 
     EDITFORM_CLASS = GroupForm
 
