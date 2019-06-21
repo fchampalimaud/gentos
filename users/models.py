@@ -34,7 +34,7 @@ class Institution(models.Model):
 class DatabaseAccess(models.Model):
     ACCESS_LEVELS = Choices(
         ('admin', "Group members can manage all entries"),
-        ('basic', "Group members can add and edit/remove their entries only"),
+        ('basic', "Group members can only manage their own entries"),
         ('view', "Group members can only view"),
     )
 
@@ -48,7 +48,7 @@ class DatabaseAccess(models.Model):
         verbose_name="access level",
         max_length=6,
         choices=ACCESS_LEVELS,
-        default=ACCESS_LEVELS.basic,
+        default=ACCESS_LEVELS.view,
     )
 
     class Meta:
