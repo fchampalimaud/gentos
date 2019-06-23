@@ -46,7 +46,7 @@ class DatabaseAccess(models.Model):
     group = models.ForeignKey(
         to="users.Group", on_delete=models.CASCADE, related_name="accesses"
     )
-    db = models.CharField(
+    animaldb = models.CharField(
         verbose_name="database", max_length=10, choices=get_installed_dbs()
     )
     level = models.CharField(
@@ -59,7 +59,7 @@ class DatabaseAccess(models.Model):
     class Meta:
         verbose_name = "database access"
         verbose_name_plural = "database accesses"
-        unique_together = ("group", "db")
+        unique_together = ("group", "animaldb")
 
 
 class Group(models.Model):
