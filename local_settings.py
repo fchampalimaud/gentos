@@ -3,7 +3,6 @@ SETTINGS_PRIORITY = 0
 PYFORMS_MODE = 'WEB'
 
 ORQUESTRA_REQUIREAUTH = True
-ORQUESTRA_TITLE = '<img src="/static/images/congento-logo.png" />'
-
+ORQUESTRA_TITLE = '<img src="/static/logo/congento.png" />'
 
 ORQUESTRA_SHOW_NO_MODULE_EXCEPTION = False
