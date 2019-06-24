@@ -11,7 +11,7 @@ User = get_user_model()
 class MembershipInline(ModelAdminWidget):
     MODEL = Membership
 
-    LIST_DISPLAY = ["group", "is_manager"]
+    LIST_DISPLAY = ["group", "is_responsible", "is_manager"]
 
 
 class UserForm(ModelFormWidget):

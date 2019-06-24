@@ -1,13 +1,25 @@
 from confapp import conf
+from pyforms_web.organizers import no_columns, segment
 from pyforms_web.widgets.django import ModelAdminWidget
 from pyforms_web.widgets.django import ModelFormWidget
 
-from users.models import Group
-from users.models import Membership
+from users import models
+
+
+class DatabaseAccessInline(ModelAdminWidget):
+    MODEL = models.DatabaseAccess
+
+    LIST_DISPLAY = ["animaldb", "level"]
+
+
+class MembershipInlineForm(ModelFormWidget):
+    FIELDSETS = [no_columns("user", "is_responsible", "is_manager")]
 
 
 class MembershipInline(ModelAdminWidget):
-    MODEL = Membership
+    MODEL = models.Membership
+
+    EDITFORM_CLASS = MembershipInlineForm
 
     LIST_DISPLAY = ["user", "is_responsible", "is_manager"]
 
@@ -15,11 +27,11 @@ class MembershipInline(ModelAdminWidget):
 class GroupForm(ModelFormWidget):
     FIELDSETS = [
         ("name", "institution"),
-        " ",
-        "MembershipInline",
+        segment("h3:Group Permissions", "DatabaseAccessInline"),
+        segment("h3:Group Members", "MembershipInline"),
     ]
 
-    INLINES = [MembershipInline]
+    INLINES = [DatabaseAccessInline, MembershipInline]
 
     LAYOUT_POSITION = conf.ORQUESTRA_NEW_TAB
 
@@ -32,10 +44,11 @@ class GroupForm(ModelFormWidget):
 
 
 class GroupsListApp(ModelAdminWidget):
-
     UID = "groups"
-    MODEL = Group
+    MODEL = models.Group
     TITLE = "Groups"
+
+    LIST_DISPLAY = ["name", "databases", "users_count"]
 
     AUTHORIZED_GROUPS = ["superuser"]
 

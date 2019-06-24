@@ -65,27 +65,19 @@ class DatabaseAccess(models.Model):
 class Group(models.Model):
     name = models.CharField(max_length=150, unique=True)
     email = models.EmailField(blank=True)
-    institution = models.ForeignKey(to="Institution", on_delete=models.CASCADE)
+    institution = models.ForeignKey(to="users.Institution", on_delete=models.CASCADE)
     users = models.ManyToManyField(to=settings.AUTH_USER_MODEL, through="Membership")
 
     def __str__(self):
         return self.name
 
-    def clean(self):
-        if not self.pk:
-            # avoids ValueError:
-            # needs to have a value for field "id" before this
-            # many-to-many relationship can be used
-            return
+    def users_count(self):
+        return self.users.count()
 
-        responsible_found = False
-        for user in self.users.all():
-            print(user)
-            print(user.__dict__)
-            # if user
+    def databases(self):
+        return ", ".join([access.animaldb for access in self.accesses.all()])
 
-        # TODO
-        # FIXME
+    users_count.short_description = "users"
 
 
 class Membership(models.Model):
