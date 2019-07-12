@@ -74,10 +74,10 @@ class Group(models.Model):
     def users_count(self):
         return self.users.count()
 
+    users_count.short_description = "users"
+
     def databases(self):
         return ", ".join([access.animaldb for access in self.accesses.all()])
-
-    users_count.short_description = "users"
 
 
 class Membership(models.Model):
