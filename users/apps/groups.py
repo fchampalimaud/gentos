@@ -49,6 +49,7 @@ class GroupsListApp(ModelAdminWidget):
     TITLE = "Groups"
 
     LIST_DISPLAY = ["id", "name", "databases", "users_count"]
+    LIST_FILTER = ["accesses__animaldb"]
 
     AUTHORIZED_GROUPS = ["superuser"]
 
