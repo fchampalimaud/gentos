@@ -48,7 +48,7 @@ class GroupsListApp(ModelAdminWidget):
     MODEL = models.Group
     TITLE = "Groups"
 
-    LIST_DISPLAY = ["name", "databases", "users_count"]
+    LIST_DISPLAY = ["id", "name", "databases", "users_count"]
 
     AUTHORIZED_GROUPS = ["superuser"]
 
