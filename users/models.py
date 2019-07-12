@@ -22,7 +22,50 @@ def get_installed_dbs():
 
 
 class User(AbstractUser):
-    ...
+
+    def __str__(self):
+        return self.get_full_name() or f"{self.username} <{self.email}>"
+
+    def get_group(self):
+        # FIXME what if user has access through multiple groups?
+        memberships = self.memberships.all()
+        group = self.memberships.first().group
+        return group
+
+    def get_access_level(self, animaldb):
+        """
+        animaldb: one of 'fishdb', 'flydb', 'rodentdb'
+
+        Returns the access level this user has to the database:
+            - 'admin', 'manager', 'basic', 'view', None
+        """
+
+        if self.is_superuser:
+            return "superuser"
+
+        can_access_db = self.memberships.filter(
+            group__accesses__animaldb=animaldb,
+        ).exists()
+
+        if can_access_db:
+            if self.memberships.filter(is_manager=True).exists():
+                return "manager"
+            if self.memberships.filter(group__accesses__animaldb=animaldb, group__accesses__level="admin").exists():
+                return "admin"
+            if self.memberships.filter(group__accesses__animaldb=animaldb, group__accesses__level="basic").exists():
+                return "basic"
+            if self.memberships.filter(group__accesses__animaldb=animaldb, group__accesses__level="view").exists():
+                return "view"
+
+    def is_admin(self, animaldb):
+        """
+        animaldb: one of 'fishdb', 'flydb', 'rodentdb'
+        Returns True if user has admin access level to this database.
+        """
+        return self.memberships.filter(
+            group__accesses__animaldb=animaldb,
+            group__accesses__level="admin",
+        ).exists()
 
 
 class Institution(models.Model):
