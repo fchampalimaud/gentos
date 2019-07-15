@@ -67,6 +67,12 @@ class User(AbstractUser):
             group__accesses__level="admin",
         ).exists()
 
+    def is_group_manager(self, group):
+        return self.memberships.filter(group=group, is_manager=True).exists()
+
+    def is_manager(self):
+        return self.memberships.filter(is_manager=True).exists()
+
 
 class Institution(models.Model):
     name = models.CharField(max_length=150)
