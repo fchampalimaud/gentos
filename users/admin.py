@@ -1,10 +1,18 @@
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth import admin as auth_admin
+from django.contrib.auth import forms as auth_forms
 
 from . import models
 
 
-admin.site.register(models.User, UserAdmin)
+@admin.register(models.User)
+class UserAdmin(auth_admin.UserAdmin):
+
+    form = auth_forms.UserChangeForm
+    add_form = auth_forms.UserCreationForm
+    fieldsets = (("User", {"fields": ("name",)}),) + auth_admin.UserAdmin.fieldsets
+    list_display = ["username", "name", "email", "is_superuser"]
+    search_fields = ["name", "email"]
 
 
 @admin.register(models.Institution)

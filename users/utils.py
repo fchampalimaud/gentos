@@ -1,2 +1,2 @@
 def user_display_name(user):
-    return user.get_full_name().strip() or user.username
+    return user.get_display_name()

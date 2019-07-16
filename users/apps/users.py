@@ -1,5 +1,6 @@
 from confapp import conf
 from django.contrib.auth import get_user_model
+from pyforms_web.organizers import no_columns, segment
 from pyforms_web.widgets.django import ModelAdminWidget
 from pyforms_web.widgets.django import ModelFormWidget
 
@@ -8,20 +9,28 @@ from users.models import Membership
 User = get_user_model()
 
 
+class MembershipInlineForm(ModelFormWidget):
+    FIELDSETS = [no_columns("group", "is_responsible", "is_manager")]
+
+
 class MembershipInline(ModelAdminWidget):
     MODEL = Membership
+
+    EDITFORM_CLASS = MembershipInlineForm
 
     LIST_DISPLAY = ["group", "is_responsible", "is_manager"]
 
 
 class UserForm(ModelFormWidget):
     FIELDSETS = [
-        ("username", "email"),
-        ("first_name", "last_name"),
+        ("name", "email", "display_name"),
         " ",
         "is_active",
+        "is_staff",
+        "is_superuser",
         " ",
         "MembershipInline",
+        ("last_login", "date_joined"),
     ]
 
     READ_ONLY = ["username", "email"]
@@ -33,7 +42,7 @@ class UserForm(ModelFormWidget):
     @property
     def title(self):
         try:
-            return self.model_object.get_full_name()
+            return self.model_object.get_display_name()
         except AttributeError:
             pass  # apparently it defaults to App TITLE
 
@@ -48,7 +57,7 @@ class UsersListApp(ModelAdminWidget):
 
     EDITFORM_CLASS = UserForm
 
-    LIST_DISPLAY = ["get_full_name", "email", "is_active", "is_staff", "is_superuser"]
+    LIST_DISPLAY = ["name", "email", "is_active", "is_staff", "is_superuser"]
 
     USE_DETAILS_TO_EDIT = False  # required to have form in NEW_TAB
 

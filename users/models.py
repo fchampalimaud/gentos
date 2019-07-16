@@ -23,8 +23,14 @@ def get_installed_dbs():
 
 class User(AbstractUser):
 
+    name = models.CharField(verbose_name="Name", max_length=255)
+    display_name = models.CharField(verbose_name="Display name", max_length=40, blank=True)
+
     def __str__(self):
-        return self.get_full_name() or f"{self.username} <{self.email}>"
+        return f"{self.name} <{self.email}>"
+
+    def get_display_name(self):
+        return self.display_name or self.name.split()[0]
 
     def get_group(self):
         # FIXME what if user has access through multiple groups?
@@ -56,6 +62,9 @@ class User(AbstractUser):
                 return "basic"
             if self.memberships.filter(group__accesses__animaldb=animaldb, group__accesses__level="view").exists():
                 return "view"
+
+    def get_institution(self):
+        raise NotImplementedError
 
     def is_admin(self, animaldb):
         """

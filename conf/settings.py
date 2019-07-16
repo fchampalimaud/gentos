@@ -205,6 +205,9 @@ ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_USER_DISPLAY = "users.utils.user_display_name"
+ACCOUNT_FORMS = {'signup': 'users.forms.SignupForm'}
+
+SOCIALACCOUNT_ADAPTER = 'users.adapters.SocialAccountAdapter'
 
 
 # django-rest-models
