@@ -39,7 +39,7 @@ class User(AbstractUser):
             return group
         return None
 
-    get_group.short_description = "Goup"
+    get_group.short_description = "Group"
 
     def get_access_level(self, animaldb):
         """
@@ -108,10 +108,10 @@ class DatabaseAccess(models.Model):
         to="users.Group", on_delete=models.CASCADE, related_name="accesses"
     )
     animaldb = models.CharField(
-        verbose_name="database", max_length=10, choices=get_installed_dbs()
+        verbose_name="Database", max_length=10, choices=get_installed_dbs()
     )
     level = models.CharField(
-        verbose_name="access level",
+        verbose_name="Access level",
         max_length=6,
         choices=ACCESS_LEVELS,
         default=ACCESS_LEVELS.view,
@@ -135,7 +135,7 @@ class Group(models.Model):
     def users_count(self):
         return self.users.count()
 
-    users_count.short_description = "users"
+    users_count.short_description = "Users"
 
     def databases(self):
         return ", ".join([access.animaldb for access in self.accesses.all()])
@@ -152,12 +152,12 @@ class Membership(models.Model):
     )
 
     is_responsible = models.BooleanField(
-        verbose_name="responsible",
+        verbose_name="Responsible",
         default=False,
         help_text="Designates whether the user is the POC.",
     )
     is_manager = models.BooleanField(
-        verbose_name="manager",
+        verbose_name="Manager",
         default=False,
         help_text=(
             "Designates whether the user has permissions to manage all group "

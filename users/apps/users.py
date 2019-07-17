@@ -66,6 +66,12 @@ class UsersListApp(ModelAdminWidget):
     ORQUESTRA_MENU_ORDER = 10
     ORQUESTRA_MENU_ICON = "users"
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self._list.headers = ["Name", "Email Address", "Group", "Active"]
+        self._list.custom_filter_labels = {"is_active": "Active"}
+
     def get_queryset(self, request, queryset):
         print(queryset)
 
