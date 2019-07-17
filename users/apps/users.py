@@ -1,6 +1,6 @@
 from confapp import conf
 from django.contrib.auth import get_user_model
-from pyforms_web.organizers import no_columns, segment
+from pyforms_web.organizers import no_columns
 from pyforms_web.widgets.django import ModelAdminWidget
 from pyforms_web.widgets.django import ModelFormWidget
 
