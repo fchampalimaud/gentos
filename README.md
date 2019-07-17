@@ -36,6 +36,13 @@ to test e-mails.
 ...
 
 
+## Configuration
+
+```
+ACCOUNT_ALLOW_REGISTRATION (=True)
+```
+
+
 ## Notes
 
 ...
