@@ -57,7 +57,15 @@ class UsersListApp(ModelAdminWidget):
 
     EDITFORM_CLASS = UserForm
 
-    LIST_DISPLAY = ["name", "email", "is_active", "is_staff", "is_superuser"]
+    LIST_DISPLAY = ["name", "email", "get_group", "is_active"]
+
+    LIST_FILTER = [
+        "memberships__group",
+        "memberships__group__accesses__animaldb",
+        "is_active",
+    ]
+
+    SEARCH_FIELDS = ["name__icontains", "email__icontains"]
 
     USE_DETAILS_TO_EDIT = False  # required to have form in NEW_TAB
 
