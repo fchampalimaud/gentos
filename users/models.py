@@ -34,9 +34,12 @@ class User(AbstractUser):
 
     def get_group(self):
         # FIXME what if user has access through multiple groups?
-        memberships = self.memberships.all()
-        group = self.memberships.first().group
-        return group
+        if self.memberships.all().exists():
+            group = self.memberships.first().group
+            return group
+        return None
+
+    get_group.short_description = "Goup"
 
     def get_access_level(self, animaldb):
         """
