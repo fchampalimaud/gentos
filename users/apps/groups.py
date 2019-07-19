@@ -51,8 +51,6 @@ class GroupsListApp(ModelAdminWidget):
     LIST_DISPLAY = ["id", "name", "databases", "users_count"]
     LIST_FILTER = ["accesses__animaldb"]
 
-    AUTHORIZED_GROUPS = ["superuser"]
-
     EDITFORM_CLASS = GroupForm
 
     USE_DETAILS_TO_EDIT = False  # required to have form in NEW_TAB
@@ -61,3 +59,13 @@ class GroupsListApp(ModelAdminWidget):
     ORQUESTRA_MENU = "middle-left"
     ORQUESTRA_MENU_ORDER = 10
     ORQUESTRA_MENU_ICON = "users"
+
+    @classmethod
+    def has_permissions(cls, user):
+        if user.is_superuser or user.is_facility_staff():
+            return True
+        return False
+
+    def has_update_permissions(self, obj):
+        # TODO allow update only their (admin) groups
+        return False
