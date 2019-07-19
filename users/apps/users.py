@@ -53,8 +53,6 @@ class UsersListApp(ModelAdminWidget):
     MODEL = User
     TITLE = "Users"
 
-    AUTHORIZED_GROUPS = ["superuser"]
-
     EDITFORM_CLASS = UserForm
 
     LIST_DISPLAY = ["name", "email", "get_group", "is_active"]
@@ -74,6 +72,12 @@ class UsersListApp(ModelAdminWidget):
     ORQUESTRA_MENU_ORDER = 10
     ORQUESTRA_MENU_ICON = "users"
 
+    @classmethod
+    def has_permissions(cls, user):
+        if user.is_superuser or user.is_facility_staff():
+            return True
+        return False
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -81,17 +85,26 @@ class UsersListApp(ModelAdminWidget):
         self._list.custom_filter_labels = {"is_active": "Active"}
 
     def get_queryset(self, request, queryset):
-        print(queryset)
-
         user = request.user
 
         if user.is_superuser:
-            pass
+            return queryset
+        else:
+            facility_users = queryset.none()
 
-        for user in queryset:
-            print(user)
-            print(user.__dict__)
-            print(user.groups.all())
-            print(user.memberships.all())
+            if user.is_admin("fishdb"):
+                facility_users |= queryset.fishdb_users()
 
-        return queryset
+            if user.is_admin("flydb"):
+                facility_users |= queryset.flydb_users()
+
+            if user.is_admin("rodentdb"):
+                facility_users |= queryset.rodentdb_users()
+
+            return facility_users.distinct()
+
+    def has_add_permissions(self):
+        return False
+
+    def has_remove_permissions(self, obj):
+        return False
