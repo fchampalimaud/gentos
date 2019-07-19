@@ -94,6 +94,10 @@ class User(AbstractUser):
     def is_manager(self):
         return self.memberships.filter(is_manager=True).exists()
 
+    def is_facility_staff(self):
+        """Returns True if the user has "admin" access level to any animal database."""
+        return self.memberships.filter(group__accesses__level="admin").exists()
+
 
 class Institution(models.Model):
     name = models.CharField(max_length=150)
