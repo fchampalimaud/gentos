@@ -33,7 +33,13 @@ class User(AbstractUser):
         return f"{self.name} <{self.email}>"
 
     def get_display_name(self):
-        return self.display_name or self.name.split()[0]
+        if self.display_name:
+            return self.display_name
+        else:
+            display_name = self.name
+            if len(display_name) > 40:
+                display_name = display_name.split()[0]
+            return display_name
 
     def get_group(self):
         # FIXME what if user has access through multiple groups?
