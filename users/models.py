@@ -89,9 +89,11 @@ class User(AbstractUser):
         ).exists()
 
     def is_group_manager(self, group):
+        """Returns True if the user is a "manager" of the provided group."""
         return self.memberships.filter(group=group, is_manager=True).exists()
 
     def is_manager(self):
+        """Returns True if the user is a "manager" of any group."""
         return self.memberships.filter(is_manager=True).exists()
 
     def is_facility_staff(self):
