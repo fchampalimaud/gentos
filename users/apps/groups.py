@@ -50,6 +50,7 @@ class GroupsListApp(ModelAdminWidget):
 
     LIST_DISPLAY = ["id", "name", "databases", "users_count"]
     LIST_FILTER = ["accesses__animaldb"]
+    SEARCH_FIELDS = ["name__icontains"]
 
     EDITFORM_CLASS = GroupForm
 
