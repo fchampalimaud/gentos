@@ -4,6 +4,7 @@ from django.apps import apps
 from django.conf import settings
 
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import UserManager
 from django.db import models
 from model_utils import Choices
 
@@ -27,7 +28,8 @@ class User(AbstractUser):
     name = models.CharField(verbose_name="Name", max_length=255)
     display_name = models.CharField(verbose_name="Display name", max_length=40, blank=True)
 
-    objects = UserQuerySet.as_manager()
+    objects = UserManager()
+    db_users = UserQuerySet.as_manager()
 
     def __str__(self):
         return f"{self.name} <{self.email}>"
