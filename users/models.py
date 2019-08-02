@@ -37,11 +37,13 @@ class User(AbstractUser):
     def get_display_name(self):
         if self.display_name:
             return self.display_name
-        else:
+        elif self.name:
             display_name = self.name
             if len(display_name) > 40:
                 display_name = display_name.split()[0]
             return display_name
+        else:
+            return self.username
 
     def get_group(self):
         # FIXME what if user has access through multiple groups?
