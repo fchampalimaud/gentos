@@ -2,9 +2,9 @@ import logging
 
 from django.apps import apps
 from django.conf import settings
-
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import UserManager
+from django.core.exceptions import ValidationError
 from django.db import models
 from model_utils import Choices
 
@@ -33,6 +33,12 @@ class User(AbstractUser):
 
     def __str__(self):
         return f"{self.name} <{self.email}>"
+
+    def clean(self):
+        super().clean()
+
+        if self.is_active and not self.memberships.all().exists():
+            raise ValidationError("Active users may belong to at least one group.")
 
     def get_display_name(self):
         if self.display_name:
