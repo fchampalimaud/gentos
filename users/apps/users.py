@@ -90,6 +90,8 @@ class UsersListApp(ModelAdminWidget):
         if user.is_superuser:
             return queryset
         else:
+            queryset = self.model.db_users.all()
+
             facility_users = queryset.none()
 
             if user.is_admin("fishdb"):
