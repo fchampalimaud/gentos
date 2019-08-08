@@ -26,7 +26,9 @@ def get_installed_dbs():
 class User(AbstractUser):
 
     name = models.CharField(verbose_name="Name", max_length=255)
-    display_name = models.CharField(verbose_name="Display name", max_length=40, blank=True)
+    display_name = models.CharField(
+        verbose_name="Display name", max_length=40, blank=True
+    )
 
     objects = UserManager()
     db_users = UserQuerySet.as_manager()
@@ -72,17 +74,23 @@ class User(AbstractUser):
             return "superuser"
 
         can_access_db = self.memberships.filter(
-            group__accesses__animaldb=animaldb,
+            group__accesses__animaldb=animaldb
         ).exists()
 
         if can_access_db:
             if self.memberships.filter(is_manager=True).exists():
                 return "manager"
-            if self.memberships.filter(group__accesses__animaldb=animaldb, group__accesses__level="admin").exists():
+            if self.memberships.filter(
+                group__accesses__animaldb=animaldb, group__accesses__level="admin"
+            ).exists():
                 return "admin"
-            if self.memberships.filter(group__accesses__animaldb=animaldb, group__accesses__level="basic").exists():
+            if self.memberships.filter(
+                group__accesses__animaldb=animaldb, group__accesses__level="basic"
+            ).exists():
                 return "basic"
-            if self.memberships.filter(group__accesses__animaldb=animaldb, group__accesses__level="view").exists():
+            if self.memberships.filter(
+                group__accesses__animaldb=animaldb, group__accesses__level="view"
+            ).exists():
                 return "view"
 
     def get_institution(self):
@@ -94,8 +102,7 @@ class User(AbstractUser):
         Returns True if user has admin access level to this database.
         """
         return self.memberships.filter(
-            group__accesses__animaldb=animaldb,
-            group__accesses__level="admin",
+            group__accesses__animaldb=animaldb, group__accesses__level="admin"
         ).exists()
 
     def is_group_manager(self, group):

@@ -13,6 +13,6 @@ class SignupForm(SignupForm):
     )
 
     def custom_signup(self, request, user):
-        user.name = self.cleaned_data['name']
+        user.name = self.cleaned_data["name"]
         user.save()
         return user
