@@ -1,27 +1,61 @@
 from confapp import conf
-from pyforms_web.organizers import no_columns, segment
+from pyforms_web.organizers import segment
 from pyforms_web.widgets.django import ModelAdminWidget
 from pyforms_web.widgets.django import ModelFormWidget
 
-from users import models
+from .. import models
+from .utils import HELP_TAG
+
+
+class DatabaseAccessInlineForm(ModelFormWidget):
+    FIELDSETS = [("animaldb", "level")]
+
+    LAYOUT_POSITION = conf.ORQUESTRA_NEW_WINDOW
 
 
 class DatabaseAccessInline(ModelAdminWidget):
     MODEL = models.DatabaseAccess
 
     LIST_DISPLAY = ["animaldb", "level"]
+    LIST_HEADERS = ["Database", "Access level"]
+
+    EDITFORM_CLASS = DatabaseAccessInlineForm
+
+    USE_DETAILS_TO_ADD = False  # required to have form in NEW_TAB
+    USE_DETAILS_TO_EDIT = False  # required to have form in NEW_TAB
 
 
 class MembershipInlineForm(ModelFormWidget):
-    FIELDSETS = [no_columns("user", "is_responsible", "is_manager")]
+    FIELDSETS = ["user", "is_responsible", "is_manager"]
+
+    LAYOUT_POSITION = conf.ORQUESTRA_NEW_WINDOW
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        is_manager_help = self.model._meta.get_field("is_manager").help_text
+        is_responsible_help = self.model._meta.get_field("is_responsible").help_text
+
+        self.is_manager.checkbox_type = ""
+        self.is_responsible.checkbox_type = ""
+
+        self.is_manager.label += HELP_TAG.format(msg=is_manager_help)
+        self.is_responsible.label += HELP_TAG.format(msg=is_responsible_help)
+
+        self.is_manager.label_visible = False
+        self.is_responsible.label_visible = False
 
 
 class MembershipInline(ModelAdminWidget):
     MODEL = models.Membership
 
+    LIST_DISPLAY = ["user", "is_responsible", "is_manager"]
+    LIST_HEADERS = ["User", "Responsible", "Manager"]
+
     EDITFORM_CLASS = MembershipInlineForm
 
-    LIST_DISPLAY = ["user", "is_responsible", "is_manager"]
+    USE_DETAILS_TO_ADD = False  # required to have form in NEW_TAB
+    USE_DETAILS_TO_EDIT = False  # required to have form in NEW_TAB
 
 
 class GroupForm(ModelFormWidget):
@@ -48,7 +82,7 @@ class GroupsListApp(ModelAdminWidget):
     MODEL = models.Group
     TITLE = "Groups"
 
-    LIST_DISPLAY = ["id", "name", "databases", "users_count"]
+    LIST_DISPLAY = ["name", "databases", "users_count"]
     LIST_FILTER = ["accesses__animaldb"]
     SEARCH_FIELDS = ["name__icontains"]
 

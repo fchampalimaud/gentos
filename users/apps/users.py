@@ -4,24 +4,14 @@ from pyforms_web.organizers import segment
 from pyforms_web.widgets.django import ModelAdminWidget
 from pyforms_web.widgets.django import ModelFormWidget
 
-from users.models import Membership
+from .. import models
+from .utils import HELP_TAG
+
 
 User = get_user_model()
 
 
-HELP_TAG = """
-<span
-    data-inverted=""
-    data-tooltip="{msg}"
-    data-position="top center"
->
-    <i class="help circle icon"></i>
-</span>
-"""
-
-
 class MembershipInlineForm(ModelFormWidget):
-    FIELDSETS = [("group", "is_responsible", "is_manager")]
     FIELDSETS = ["group", "is_responsible", "is_manager"]
 
     LAYOUT_POSITION = conf.ORQUESTRA_NEW_WINDOW
@@ -43,14 +33,12 @@ class MembershipInlineForm(ModelFormWidget):
 
 
 class MembershipInline(ModelAdminWidget):
-    MODEL = Membership
-
-    TITLE = "Memberships"
-
-    EDITFORM_CLASS = MembershipInlineForm
+    MODEL = models.Membership
 
     LIST_DISPLAY = ["group", "is_responsible", "is_manager"]
     LIST_HEADERS = ["Group", "Responsible", "Manager"]
+
+    EDITFORM_CLASS = MembershipInlineForm
 
     USE_DETAILS_TO_ADD = False  # required to have form in NEW_TAB
     USE_DETAILS_TO_EDIT = False  # required to have form in NEW_TAB
@@ -65,7 +53,7 @@ class UserForm(ModelFormWidget):
             ("email", "date_joined", "last_login"),
             ("name", "display_name", "is_active"),
         ),
-        segment("MembershipInline"),
+        segment("h3:Groups", "MembershipInline"),
     ]
 
     READ_ONLY = ["username", "email", "last_login", "date_joined"]
@@ -96,10 +84,8 @@ class UserForm(ModelFormWidget):
 class UsersListApp(ModelAdminWidget):
 
     UID = "users"
-    MODEL = User
+    MODEL = models.User
     TITLE = "Users"
-
-    EDITFORM_CLASS = UserForm
 
     LIST_DISPLAY = [
         "name",
@@ -117,6 +103,8 @@ class UsersListApp(ModelAdminWidget):
     ]
 
     SEARCH_FIELDS = ["name__icontains", "email__icontains"]
+
+    EDITFORM_CLASS = UserForm
 
     USE_DETAILS_TO_EDIT = False  # required to have form in NEW_TAB
 
