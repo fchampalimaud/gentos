@@ -38,7 +38,7 @@ class User(AbstractUser):
         super().clean()
 
         if self.is_active and not self.memberships.all().exists():
-            raise ValidationError("Active users may belong to at least one group.")
+            raise ValidationError("Active users need to belong to at least one group.")
 
     def get_display_name(self):
         if self.display_name:
