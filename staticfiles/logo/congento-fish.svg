@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="100"
+   height="60"
+   viewBox="0 0 26.45833 15.874999"
+   version="1.1"
+   id="svg4902"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="congento-fish.svg">
+  <defs
+     id="defs4896" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#000000"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.8"
+     inkscape:cx="43.684978"
+     inkscape:cy="14.75957"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     units="px"
+     inkscape:window-width="930"
+     inkscape:window-height="729"
+     inkscape:window-x="317"
+     inkscape:window-y="642"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata4899">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-88.424141,-117.85838)">
+    <g
+       id="g5283"
+       transform="translate(-6.4255965,17.008933)">
+      <g
+         id="g4507"
+         transform="matrix(0.35277777,0,0,-0.35277777,112.95599,109.86676)">
+        <path
+           d="M 0,0 C -1.689,0 -3.05,1.37 -3.05,3.061 -3.05,4.75 -1.689,6.12 0,6.12 1.69,6.12 3.061,4.75 3.061,3.061 3.061,1.37 1.69,0 0,0 m 0.33,10.42 h -13.58 c -4.05,0 -7.359,-3.31 -7.359,-7.359 0,-4.051 3.309,-7.361 7.359,-7.361 H 0.33 c 4.05,0 7.36,3.31 7.36,7.361 0,4.049 -3.31,7.359 -7.36,7.359"
+           style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="path4509"
+           inkscape:connector-curvature="0" />
+      </g>
+      <g
+         id="g4511"
+         transform="matrix(0.35277777,0,0,-0.35277777,103.08646,103.79426)">
+        <path
+           d="m 0,0 v 0 c 4.051,0 7.364,-3.313 7.364,-7.364 v -13.577 c 0,-4.051 -3.313,-7.364 -7.364,-7.364 -4.05,0 -7.363,3.313 -7.363,7.364 V -7.364 C -7.363,-3.313 -4.05,0 0,0"
+           style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="path4513"
+           inkscape:connector-curvature="0" />
+      </g>
+    </g>
+  </g>
+</svg>

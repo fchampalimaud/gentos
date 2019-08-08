@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="100"
+   height="60"
+   viewBox="0 0 26.45833 15.874999"
+   version="1.1"
+   id="svg4902"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="congento-flysvg.svg">
+  <defs
+     id="defs4896" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#000000"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.8"
+     inkscape:cx="43.684978"
+     inkscape:cy="14.75957"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     units="px"
+     inkscape:window-width="930"
+     inkscape:window-height="729"
+     inkscape:window-x="317"
+     inkscape:window-y="642"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata4899">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-88.424141,-117.85838)">
+    <g
+       id="g5110"
+       transform="translate(3.7797616,11.150302)">
+      <g
+         id="g4495"
+         transform="matrix(0.35277777,0,0,-0.35277777,101.88367,114.62314)">
+        <path
+           d="m 0,0 c 0,-1.698 1.377,-3.073 3.073,-3.073 1.698,0 3.074,1.375 3.074,3.073 0,1.697 -1.376,3.073 -3.074,3.073 C 1.377,3.073 0,1.697 0,0"
+           style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="path4497"
+           inkscape:connector-curvature="0" />
+      </g>
+      <g
+         id="g4499"
+         transform="matrix(0.35277777,0,0,-0.35277777,92.04276,120.94661)">
+        <path
+           d="m 0,0 v 0 c -2.036,3.526 -0.816,8.077 2.71,10.114 l 11.821,6.825 c 3.527,2.036 8.077,0.816 10.115,-2.71 2.035,-3.527 0.816,-8.078 -2.71,-10.114 L 10.113,-2.71 C 6.588,-4.746 2.036,-3.527 0,0"
+           style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="path4501"
+           inkscape:connector-curvature="0" />
+      </g>
+      <g
+         id="g4503"
+         transform="matrix(0.35277777,0,0,-0.35277777,92.04276,108.34447)">
+        <path
+           d="m 0,0 v 0 c 2.036,3.526 6.587,4.746 10.114,2.71 l 11.822,-6.825 c 3.526,-2.036 4.745,-6.587 2.71,-10.114 -2.037,-3.526 -6.588,-4.746 -10.115,-2.71 L 2.71,-10.114 C -0.816,-8.077 -2.036,-3.527 0,0"
+           style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="path4505"
+           inkscape:connector-curvature="0" />
+      </g>
+    </g>
+  </g>
+</svg>
