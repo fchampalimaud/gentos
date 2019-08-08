@@ -1,6 +1,6 @@
 from confapp import conf
 from django.contrib.auth import get_user_model
-from pyforms_web.organizers import no_columns
+from pyforms_web.organizers import segment
 from pyforms_web.widgets.django import ModelAdminWidget
 from pyforms_web.widgets.django import ModelFormWidget
 
@@ -9,35 +9,81 @@ from users.models import Membership
 User = get_user_model()
 
 
+HELP_TAG = """
+<span
+    data-inverted=""
+    data-tooltip="{msg}"
+    data-position="top center"
+>
+    <i class="help circle icon"></i>
+</span>
+"""
+
+
 class MembershipInlineForm(ModelFormWidget):
-    FIELDSETS = [no_columns("group", "is_responsible", "is_manager")]
+    FIELDSETS = [("group", "is_responsible", "is_manager")]
+    FIELDSETS = ["group", "is_responsible", "is_manager"]
+
+    LAYOUT_POSITION = conf.ORQUESTRA_NEW_WINDOW
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        is_manager_help = self.model._meta.get_field("is_manager").help_text
+        is_responsible_help = self.model._meta.get_field("is_responsible").help_text
+
+        self.is_manager.checkbox_type = ""
+        self.is_responsible.checkbox_type = ""
+
+        self.is_manager.label += HELP_TAG.format(msg=is_manager_help)
+        self.is_responsible.label += HELP_TAG.format(msg=is_responsible_help)
+
+        self.is_manager.label_visible = False
+        self.is_responsible.label_visible = False
 
 
 class MembershipInline(ModelAdminWidget):
     MODEL = Membership
 
+    TITLE = "Memberships"
+
     EDITFORM_CLASS = MembershipInlineForm
 
     LIST_DISPLAY = ["group", "is_responsible", "is_manager"]
+    LIST_HEADERS = ["Group", "Responsible", "Manager"]
+
+    USE_DETAILS_TO_ADD = False  # required to have form in NEW_TAB
+    USE_DETAILS_TO_EDIT = False  # required to have form in NEW_TAB
 
 
 class UserForm(ModelFormWidget):
+    UID = "user"
+    MODEL = User
+
     FIELDSETS = [
-        ("name", "email", "display_name"),
-        " ",
-        "is_active",
-        "is_staff",
-        "is_superuser",
-        " ",
-        "MembershipInline",
-        ("last_login", "date_joined"),
+        segment(
+            ("email", "date_joined", "last_login"),
+            ("name", "display_name", "is_active"),
+        ),
+        segment("MembershipInline"),
     ]
 
-    READ_ONLY = ["username", "email"]
+    READ_ONLY = ["username", "email", "last_login", "date_joined"]
 
     INLINES = [MembershipInline]
 
     LAYOUT_POSITION = conf.ORQUESTRA_NEW_TAB
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.is_active.checkbox_type = ""
+
+        # Custom labels because Django likes smallcase verbose names
+        self.email.label = "Email address"
+        self.date_joined.label = "Date joined"
+        self.last_login.label = "Last login"
+        self.is_active.label = "Active"
 
     @property
     def title(self):
@@ -55,7 +101,14 @@ class UsersListApp(ModelAdminWidget):
 
     EDITFORM_CLASS = UserForm
 
-    LIST_DISPLAY = ["name", "email", "get_group", "is_active"]
+    LIST_DISPLAY = [
+        "name",
+        "email",
+        "get_group",
+        "is_active",
+        "date_joined",
+        "last_login",
+    ]
 
     LIST_FILTER = [
         "memberships__group",
@@ -81,7 +134,14 @@ class UsersListApp(ModelAdminWidget):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self._list.headers = ["Name", "Email Address", "Group", "Active"]
+        self._list.headers = [
+            "Name",
+            "Email address",
+            "Group",
+            "Active",
+            "Date joined",
+            "Last login",
+        ]
         self._list.custom_filter_labels = {"is_active": "Active"}
 
     def get_queryset(self, request, queryset):
