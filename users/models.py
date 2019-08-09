@@ -1,5 +1,6 @@
 import logging
 
+from allauth.account.models import EmailAddress
 from django.apps import apps
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
@@ -38,6 +39,10 @@ class User(AbstractUser):
 
     def clean(self):
         super().clean()
+
+        has_verified_email = EmailAddress.objects.filter(user=self, verified=True).exists()
+        if self.is_active and not has_verified_email:
+            raise ValidationError("User must verify his email first.")
 
         if self.is_active and not self.memberships.all().exists():
             raise ValidationError("Active users need to belong to at least one group.")
