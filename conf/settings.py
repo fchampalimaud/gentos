@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     "flydb.apps.FlyDBConfig",
     "rodentdb.apps.RodentDBConfig",
     "confirm_users.apps.ConfirmUsersConfig",
-    "notifications",
+    "notifications.apps.NotificationsConfig",
     "orquestra",
     "pyforms_web.web",
     "jfu",
