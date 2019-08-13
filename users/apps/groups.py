@@ -4,7 +4,6 @@ from pyforms_web.widgets.django import ModelAdminWidget
 from pyforms_web.widgets.django import ModelFormWidget
 
 from .. import models
-from .utils import HELP_TAG
 
 
 class DatabaseAccessInlineForm(ModelFormWidget):
@@ -33,14 +32,8 @@ class MembershipInlineForm(ModelFormWidget):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        is_manager_help = self.model._meta.get_field("is_manager").help_text
-        is_responsible_help = self.model._meta.get_field("is_responsible").help_text
-
         self.is_manager.checkbox_type = ""
         self.is_responsible.checkbox_type = ""
-
-        self.is_manager.label += HELP_TAG.format(msg=is_manager_help)
-        self.is_responsible.label += HELP_TAG.format(msg=is_responsible_help)
 
         self.is_manager.label_visible = False
         self.is_responsible.label_visible = False
