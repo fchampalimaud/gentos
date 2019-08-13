@@ -49,8 +49,7 @@ class FormPermissionsMixin:
 
 
 def limit_choices_to_database(animaldb, field, queryset):
-    """Limit the query for related fields to values related to with a DB."""
-    # TODO general congento utility, move to common module
+    """Limit the query for related fields to values related with a DB."""
     user = PyFormsMiddleware.user()
 
     if field.name == "maintainer":
@@ -60,4 +59,5 @@ def limit_choices_to_database(animaldb, field, queryset):
 
     if field.name == "ownership":
         queryset = queryset.filter(accesses__animaldb=animaldb)
+
     return queryset.distinct()
