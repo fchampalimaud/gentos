@@ -45,7 +45,6 @@ class MembershipInline(ModelAdminWidget):
 
 
 class UserForm(ModelFormWidget):
-    UID = "user"
     MODEL = User
 
     FIELDSETS = [
