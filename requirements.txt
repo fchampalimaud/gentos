@@ -10,20 +10,20 @@
 -e ./plugins/rodentdb
 certifi==2019.6.16
 chardet==3.0.4
-confapp==1.0.9
+confapp==1.1.11
 defusedxml==0.6.0
 dill==0.3.0
-django-allauth==0.39.1
+django-allauth==0.40.0
 django-dotenv==1.4.2
 django-jfu-pyforms==2.0.9.1
 django-model-utils==3.1.2
-django==2.1.11
+django==2.1.12
 djangorestframework==3.7.7
 filelock==3.0.12
 idna==2.8
 inflection==0.3.1
 mysqlclient==1.4.4
-numpy==1.17.0
+numpy==1.17.2
 oauthlib==3.1.0
 opencv-python==3.4.5.20
 pillow==6.1.0
