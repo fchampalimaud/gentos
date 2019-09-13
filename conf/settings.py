@@ -124,8 +124,8 @@ DATABASES = {
         "NAME": os.getenv("DATABASE_API_NAME"),
         "USER": os.getenv("DATABASE_API_USERNAME"),
         "PASSWORD": os.getenv("DATABASE_API_PASSWORD"),
-        "AUTH": "rest_models.backend.auth.BasicAuth",
-        "PREVENT_DISTINCT": False,
+        # "AUTH": "rest_models.backend.auth.BasicAuth",
+        # "PREVENT_DISTINCT": False,
     },
 }
 
