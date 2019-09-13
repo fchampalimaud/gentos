@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "229b6167ae5cd4060037b53daef594bd072bef2d3887a01cc36466d8e451eb36"
+            "sha256": "97ecc4801fb0a080cc9052c89ed4ee80de97d3a075ed78ad54de66884c9c1194"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -89,10 +89,6 @@
                 "sha256:8cd377744aa45f9f131d652ec460c57d1aaa88d3e9b586c8e27eb709341b9084"
             ],
             "version": "==3.1.2"
-        },
-        "django-rest-models": {
-            "editable": true,
-            "path": "./libraries/django-rest-models"
         },
         "filelock": {
             "hashes": [
@@ -297,13 +293,6 @@
                 "sha256:d9e3f018d19293824803e4ffead96b19dfcd44fa7987cea392f50436817bef34"
             ],
             "version": "==12.5.0"
-        },
-        "unidecode": {
-            "hashes": [
-                "sha256:1d7a042116536098d05d599ef2b8616759f02985c85b4fef50c78a5aaf10822a",
-                "sha256:2b6aab710c2a1647e928e36d69c21e76b453cd455f4e2621000e54b2a9b8cce8"
-            ],
-            "version": "==1.1.1"
         },
         "urllib3": {
             "hashes": [

@@ -12,9 +12,6 @@
 [submodule "plugins/rodentdb"]
 	path = plugins/rodentdb
 	url = git@github.com:fchampalimaud/rodentdb.git
-[submodule "libraries/django-rest-models"]
-	path = libraries/django-rest-models
-	url = https://github.com/Yupeek/django-rest-models.git
 [submodule "plugins/confirm-users-app"]
 	path = plugins/confirm-users-app
 	url = git@github.com:fchampalimaud/confirm-users-app.git
