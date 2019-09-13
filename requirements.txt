@@ -1,6 +1,4 @@
 -i https://pypi.org/simple
--e ./libraries/django-rest-models
--e ./libraries/dynamic-rest
 -e ./libraries/pyforms-web
 -e ./libraries/pyforms-web/orquestra
 -e ./plugins/confirm-users-app
@@ -8,7 +6,7 @@
 -e ./plugins/flydb
 -e ./plugins/notifications-central
 -e ./plugins/rodentdb
-certifi==2019.6.16
+certifi==2019.9.11
 chardet==3.0.4
 confapp==1.1.11
 defusedxml==0.6.0
@@ -17,15 +15,14 @@ django-allauth==0.40.0
 django-dotenv==1.4.2
 django-jfu-pyforms==2.0.9.1
 django-model-utils==3.1.2
+django-rest-models==1.8.5
 django==2.1.12
-djangorestframework==3.7.7
 filelock==3.0.12
 idna==2.8
-inflection==0.3.1
 mysqlclient==1.4.4
 numpy==1.17.2
 oauthlib==3.1.0
-opencv-python==3.4.5.20
+opencv-python==3.4.7.28
 pillow==6.1.0
 python-dateutil==2.8.0
 python3-openid==3.1.0
