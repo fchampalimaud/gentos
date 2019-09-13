@@ -14,6 +14,7 @@ notifications-central = {editable = true,path = "./plugins/notifications-central
 confirm-users = {editable = true,path = "./plugins/confirm-users-app"}
 mysqlclient = "*"
 django-dotenv = "*"
+django-rest-models = "~=1.8.5"
 
 [dev-packages]
 django-debug-toolbar = "*"
