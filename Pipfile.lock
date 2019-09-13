@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "3d35adc0d3691f0b7a3129a0978e048f0a6435b9ce2660130e57c618ebe33af3"
+            "sha256": "63851ab87ffa46be22eebf7d0614ab6dd79c12d2266f9774a5e25f9a4bf4f42d"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -109,7 +109,7 @@
             "editable": true,
             "path": "./plugins/fishdb"
         },
-        "fly-db": {
+        "flydb": {
             "editable": true,
             "path": "./plugins/flydb"
         },
