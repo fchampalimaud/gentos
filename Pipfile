@@ -20,6 +20,7 @@ django-rest-models = "~=1.8.5"
 django-debug-toolbar = "*"
 black = "==19.3b0"
 flake8 = "*"
+django-extensions = "*"
 
 [requires]
 python_version = "3.7"
