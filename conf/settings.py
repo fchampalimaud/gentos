@@ -43,8 +43,8 @@ MANAGERS = [
 
 INSTALLED_APPS = [
     # local apps
-    # "congentodb_client.apps.CongentoDBConfig",
-    "client.apps.ClientConfig",
+    "congentodb_client.apps.CongentoDBConfig",
+    #"client.apps.ClientConfig",
     "users.apps.UsersConfig",
     # 3rd party apps
     "fishdb.apps.FishDBConfig",
@@ -112,8 +112,8 @@ WSGI_APPLICATION = "conf.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": os.getenv("DATABASE_NAME"),
+        "ENGINE": os.getenv("DATABASE_ENGINE", 'django.db.backends.sqlite3'),
+        "NAME": os.getenv("DATABASE_NAME", os.path.join(BASE_DIR, 'database.sqlite')),
         "USER": os.getenv("DATABASE_USERNAME"),
         "PASSWORD": os.getenv("DATABASE_PASSWORD"),
         "HOST": os.getenv("DATABASE_HOST", default="localhost"),
@@ -121,11 +121,11 @@ DATABASES = {
     },
     "api": {
         "ENGINE": "rest_models.backend",
-        "NAME": os.getenv("DATABASE_API_NAME"),
-        "USER": os.getenv("DATABASE_API_USERNAME"),
-        "PASSWORD": os.getenv("DATABASE_API_PASSWORD"),
-        # "AUTH": "rest_models.backend.auth.BasicAuth",
-        # "PREVENT_DISTINCT": False,
+        "NAME": os.getenv("DATABASE_API_NAME", 'http://localhost:8001/api'),
+        "USER": os.getenv("DATABASE_API_USERNAME", 'admin'),
+        "PASSWORD": os.getenv("DATABASE_API_PASSWORD", 'manager123'),
+        "AUTH": "rest_models.backend.auth.BasicAuth",
+        "PREVENT_DISTINCT": False,
     },
 }
 

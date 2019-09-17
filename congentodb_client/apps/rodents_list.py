@@ -17,7 +17,7 @@ class RodentsListApp(ModelAdminWidget):
     MODEL = Rodent
     TITLE = "Congento rodents"
 
-    LIST_FILTER = ["species", "mta"]
+    LIST_FILTER = ["species"]
 
     LAYOUT_POSITION = conf.ORQUESTRA_HOME
     ORQUESTRA_MENU = "middle-left"

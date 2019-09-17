@@ -1,6 +1,8 @@
+import traceback
+
 from django.contrib.contenttypes.models import ContentType
 from rodentdb.models import Rodent
-from fishdb.models import Zebrafish
+#from fishdb.models import Zebrafish
 from flydb.models import Fly
 from django.dispatch import receiver
 from django.db.models.signals import post_save, post_delete
@@ -25,12 +27,13 @@ def save_remote_rodent(sender, instance, created, **kwargs):
             remote_obj.delete()
         except RemoteRodent.DoesNotExist:
             pass
-        except:
+        except Exception as e:
             MissedSync(
                 contenttype=ContentType.objects.get_for_model(Rodent),
                 object_id=instance.pk,
                 operation='D'
             ).save()
+            print(e)
 
     elif instance.public:
 
@@ -40,28 +43,34 @@ def save_remote_rodent(sender, instance, created, **kwargs):
             except RemoteRodent.DoesNotExist:
                 remote_obj = RemoteRodent(remote_id=instance.pk)
 
+            remote_obj.availability = instance.availability
+            remote_obj.link = instance.link
+            remote_obj.species = instance.species.name if instance.species else None
 
-            remote_obj.species = instance.species
             remote_obj.strain_name = instance.strain_name
             remote_obj.common_name = instance.common_name
-            remote_obj.origin = instance.origin
-            remote_obj.availability = instance.availability
-            remote_obj.comments = instance.comments
-            remote_obj.link = instance.link
-            remote_obj.mta = instance.mta
-            remote_obj.background = instance.background
-            remote_obj.background_other = instance.background_other
-            remote_obj.genotype = instance.genotype
-            remote_obj.genotype_other = instance.genotype_other
-            remote_obj.model_type = instance.model_type
-            remote_obj.model_type_other = instance.model_type_other
+            remote_obj.origin = instance.origin.name if instance.origin else None
+            remote_obj.origin_other = instance.origin_other
+            remote_obj.category = instance.category.name if instance.category else None
+            remote_obj.background = instance.background.name if instance.background else None
+            remote_obj.zygosity = instance.zygosity.name if instance.zygosity else None
+
+            remote_obj.line_description = instance.line_description
+            remote_obj.coat_color = instance.coat_color.name if instance.coat_color else None
+            remote_obj.reporter_gene = instance.reporter_gene.name if instance.reporter_gene else None
+            remote_obj.inducible_cassette = instance.inducible_cassette.name if instance.inducible_cassette else None
+
             remote_obj.save()
-        except:
+
+        except Exception as e:
             MissedSync(
                 contenttype=ContentType.objects.get_for_model(Rodent),
                 object_id=instance.pk,
                 operation='U'
             ).save()
+            print(e)
+            #traceback.print_stack()
+
 
 
 
@@ -74,12 +83,13 @@ def delete_remote_rodent(sender, instance, **kwargs):
         remote_obj.delete()
     except RemoteRodent.DoesNotExist:
         pass
-    except:
+    except Exception as e:
         MissedSync(
             contenttype=ContentType.objects.get_for_model(Rodent),
             object_id=instance.pk,
             operation='D'
         ).save()
+        print(e)
 
 
 ####################################################
@@ -98,12 +108,13 @@ def save_remote_fly(sender, instance, created, **kwargs):
             remote_obj.delete()
         except RemoteFly.DoesNotExist:
             pass
-        except:
+        except Exception as e:
             MissedSync(
                 contenttype=ContentType.objects.get_for_model(Fly),
                 object_id=instance.pk,
                 operation='D'
             ).save()
+            print(e)
 
 
     elif instance.public:
@@ -114,6 +125,11 @@ def save_remote_fly(sender, instance, created, **kwargs):
             except RemoteFly.DoesNotExist:
                 remote_obj = RemoteFly(remote_id=instance.pk)
 
+            remote_obj.categories = "; ".join([x.name for x in instance.categories.all()])
+            remote_obj.species = instance.species.specie_name if instance.species else None
+            remote_obj.origin = instance.origin
+            remote_obj.origin_center = instance.origin_center
+            remote_obj.genotype = instance.genotype
 
             remote_obj.chrx = instance.chrx
             remote_obj.chry = instance.chry
@@ -124,20 +140,17 @@ def save_remote_fly(sender, instance, created, **kwargs):
             remote_obj.bal3 = instance.bal3
             remote_obj.chr4 = instance.chr4
             remote_obj.chru = instance.chru
-            remote_obj.legacy1 = instance.legacy1
-            remote_obj.legacy2 = instance.legacy2
-            remote_obj.legacy3 = instance.legacy3
-            remote_obj.flydbid = instance.flydbid
-            remote_obj.genotype = instance.genotype
-            remote_obj.category = instance.category
-            remote_obj.specie = instance.specie
+            remote_obj.special_husbandry_conditions = instance.special_husbandry_conditions
+            remote_obj.line_description = instance.line_description
+
             remote_obj.save()
-        except:
+        except Exception as e:
             MissedSync(
                 contenttype=ContentType.objects.get_for_model(Fly),
                 object_id=instance.pk,
                 operation='U'
             ).save()
+            print(e)
 
 
 @receiver(post_delete, sender=Fly)
@@ -148,12 +161,13 @@ def delete_remote_fly(sender, instance, **kwargs):
         remote_obj.delete()
     except RemoteFly.DoesNotExist:
         pass
-    except:
+    except Exception as e:
         MissedSync(
             contenttype=ContentType.objects.get_for_model(Fly),
             object_id=instance.pk,
             operation='D'
         ).save()
+        print(e)
 
 
 
@@ -161,7 +175,7 @@ def delete_remote_fly(sender, instance, **kwargs):
 ####################################################
 ### ZEBRAFISH ######################################
 ####################################################
-
+"""
 @receiver(post_save, sender=Zebrafish)
 def save_remote_zebrafish(sender, instance, created, **kwargs):
 
@@ -228,3 +242,4 @@ def delete_remote_zebrafish(sender, instance, **kwargs):
             object_id=instance.pk,
             operation='D'
         ).save()
+"""

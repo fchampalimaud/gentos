@@ -166,3 +166,7 @@ GitHub.sublime-settings
 # PyForms auto generated files
 apps-cache/
 lockfile.txt
+
+local-settings.py
+
+database.sqlite

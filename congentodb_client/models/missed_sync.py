@@ -1,12 +1,13 @@
-from django.contrib.auth.models import User
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.utils import timezone
 
+from users.models import User
+
 from flydb.models import Fly
 from notifications.tools import notify
 from rodentdb.models import Rodent
-from fishdb.models import Zebrafish
+#from fishdb.models import Zebrafish
 
 from ..models.fly import Fly as RemoteFly
 from ..models.rodent import Rodent as RemoteRodent
@@ -49,8 +50,8 @@ class MissedSync(models.Model):
                     remote_model = RemoteFly
                 elif model == Rodent:
                     remote_model = RemoteRodent
-                elif model == Zebrafish:
-                    remote_model = RemoteZebrafish
+                #elif model == Zebrafish:
+                #    remote_model = RemoteZebrafish
 
                 if remote_model is not None:
                     try:
