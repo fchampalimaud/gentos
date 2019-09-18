@@ -43,4 +43,3 @@ class Fish(models.Model):
     species_name = models.CharField(max_length=80)
 
     remote_id = models.BigIntegerField("Remote id")
-    institution_name = models.CharField(max_length=255, blank=True, null=True)

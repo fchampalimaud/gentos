@@ -2,7 +2,7 @@ import traceback
 
 from django.contrib.contenttypes.models import ContentType
 from rodentdb.models import Rodent
-#from fishdb.models import Zebrafish
+from fishdb.models import Fish
 from flydb.models import Fly
 from django.dispatch import receiver
 from django.db.models.signals import post_save, post_delete
@@ -173,24 +173,24 @@ def delete_remote_fly(sender, instance, **kwargs):
 
 
 ####################################################
-### ZEBRAFISH ######################################
+### Fish ######################################
 ####################################################
-"""
-@receiver(post_save, sender=Zebrafish)
-def save_remote_zebrafish(sender, instance, created, **kwargs):
+
+@receiver(post_save, sender=Fish)
+def save_remote_Fish(sender, instance, created, **kwargs):
 
     if not created and not instance.public:
 
         # for the case an object becomes private
         # remove it from the remote database
         try:
-            remote_obj = RemoteZebrafish.objects.get(remote_id=instance.pk)
+            remote_obj = RemoteFish.objects.get(remote_id=instance.pk)
             remote_obj.delete()
-        except RemoteZebrafish.DoesNotExist:
+        except RemoteFish.DoesNotExist:
             pass
         except:
             MissedSync(
-                contenttype=ContentType.objects.get_for_model(Zebrafish),
+                contenttype=ContentType.objects.get_for_model(Fish),
                 object_id=instance.pk,
                 operation='D'
             ).save()
@@ -199,47 +199,48 @@ def save_remote_zebrafish(sender, instance, created, **kwargs):
 
         try:
             try:
-                remote_obj = RemoteZebrafish.objects.get(remote_id=instance.pk)
-            except RemoteZebrafish.DoesNotExist:
-                remote_obj = RemoteZebrafish(remote_id=instance.pk)
+                remote_obj = RemoteFish.objects.get(remote_id=instance.pk)
+            except RemoteFish.DoesNotExist:
+                remote_obj = RemoteFish(remote_id=instance.pk)
 
-
+            # remote_obj.created = instance.created
+            # remote_obj.modified = instance.modified
+            remote_obj.availability = instance.availability
+            remote_obj.link = instance.link
+            remote_obj.strain_name = instance.strain_name
+            remote_obj.common_name = instance.common_name
             remote_obj.background = instance.background
             remote_obj.genotype = instance.genotype
             remote_obj.phenotype = instance.phenotype
             remote_obj.origin = instance.origin
-            remote_obj.availability = instance.availability
-            remote_obj.comments = instance.comments
-            remote_obj.link = instance.link
+            remote_obj.quarantine = instance.quarantine
             remote_obj.mta = instance.mta
-
-            remote_obj.line_name = instance.line_name
-            remote_obj.line_number = instance.line_number
-            remote_obj.line_type = instance.line_type
-            remote_obj.line_type_other = instance.line_type_other
+            remote_obj.line_description = instance.line_description
+            remote_obj.category_name = instance.category_name
+            remote_obj.species_name = instance.species_name
             remote_obj.save()
-        except:
+        except Exception as e:
             MissedSync(
-                contenttype=ContentType.objects.get_for_model(Zebrafish),
+                contenttype=ContentType.objects.get_for_model(Fish),
                 object_id=instance.pk,
                 operation='U'
             ).save()
+            print(e)
+            # traceback.print_stack()
 
 
 
-
-@receiver(post_delete, sender=Zebrafish)
-def delete_remote_zebrafish(sender, instance, **kwargs):
+@receiver(post_delete, sender=Fish)
+def delete_remote_Fish(sender, instance, **kwargs):
 
     try:
-        remote_obj = Zebrafish.objects.get(remote_id=instance.pk)
+        remote_obj = Fish.objects.get(remote_id=instance.pk)
         remote_obj.delete()
-    except Zebrafish.DoesNotExist:
+    except Fish.DoesNotExist:
         pass
     except:
         MissedSync(
-            contenttype=ContentType.objects.get_for_model(Zebrafish),
+            contenttype=ContentType.objects.get_for_model(Fish),
             object_id=instance.pk,
             operation='D'
         ).save()
-"""
