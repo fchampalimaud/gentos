@@ -7,11 +7,11 @@ from users.models import User
 from flydb.models import Fly
 from notifications.tools import notify
 from rodentdb.models import Rodent
-#from fishdb.models import Zebrafish
+from fishdb.models import Fish
 
 from ..models.fly import Fly as RemoteFly
 from ..models.rodent import Rodent as RemoteRodent
-from ..models.zebrafish import Zebrafish as RemoteZebrafish
+from ..models.fish import Fish as RemoteFish
 
 class MissedSync(models.Model):
 
@@ -50,8 +50,8 @@ class MissedSync(models.Model):
                     remote_model = RemoteFly
                 elif model == Rodent:
                     remote_model = RemoteRodent
-                #elif model == Zebrafish:
-                #    remote_model = RemoteZebrafish
+                elif model == Fish:
+                   remote_model = RemoteFish
 
                 if remote_model is not None:
                     try:

@@ -8,7 +8,7 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save, post_delete
 from congentodb_client.models.rodent import Rodent as RemoteRodent
 from congentodb_client.models.fly import Fly as RemoteFly
-from congentodb_client.models.zebrafish import Zebrafish as RemoteZebrafish
+from congentodb_client.models.fish import Fish as RemoteFish
 from congentodb_client.models.missed_sync import MissedSync
 
 ####################################################
