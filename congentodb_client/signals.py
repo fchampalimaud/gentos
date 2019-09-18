@@ -188,12 +188,14 @@ def save_remote_Fish(sender, instance, created, **kwargs):
             remote_obj.delete()
         except RemoteFish.DoesNotExist:
             pass
-        except:
+        except Exception as e:
             MissedSync(
                 contenttype=ContentType.objects.get_for_model(Fish),
                 object_id=instance.pk,
                 operation='D'
             ).save()
+            print(e)
+            # traceback.print_stack()
 
     elif instance.public:
 
@@ -203,8 +205,6 @@ def save_remote_Fish(sender, instance, created, **kwargs):
             except RemoteFish.DoesNotExist:
                 remote_obj = RemoteFish(remote_id=instance.pk)
 
-            # remote_obj.created = instance.created
-            # remote_obj.modified = instance.modified
             remote_obj.availability = instance.availability
             remote_obj.link = instance.link
             remote_obj.strain_name = instance.strain_name
@@ -216,8 +216,9 @@ def save_remote_Fish(sender, instance, created, **kwargs):
             remote_obj.quarantine = instance.quarantine
             remote_obj.mta = instance.mta
             remote_obj.line_description = instance.line_description
-            remote_obj.category_name = instance.category_name
-            remote_obj.species_name = instance.species_name
+            remote_obj.category_name = instance.category.name if instance.category else ""
+            remote_obj.species_name = instance.species.name if instance.species else ""
+
             remote_obj.save()
         except Exception as e:
             MissedSync(
