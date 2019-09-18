@@ -7,7 +7,7 @@ class Fish(models.Model):
         db_name = "api"
         resource_path = "fish"
         resource_name = "fish"
-        resource_name_plural = "fish"
+        resource_name_plural = "fishes"
 
     AVAILABILITIES = Choices(
         ("live", "Live"),
