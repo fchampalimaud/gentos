@@ -1,27 +1,26 @@
-import traceback
-
 from django.contrib.contenttypes.models import ContentType
-from rodentdb.models import Rodent
+from django.db.models.signals import post_save, post_delete
+from django.dispatch import receiver
+
+from congentodb_client.models import Fish as RemoteFish
+from congentodb_client.models import Fly as RemoteFly
+from congentodb_client.models import Rodent as RemoteRodent
+from congentodb_client.models import MissedSync
+
 from fishdb.models import Fish
 from flydb.models import Fly
-from django.dispatch import receiver
-from django.db.models.signals import post_save, post_delete
-from congentodb_client.models.rodent import Rodent as RemoteRodent
-from congentodb_client.models.fly import Fly as RemoteFly
-from congentodb_client.models.fish import Fish as RemoteFish
-from congentodb_client.models.missed_sync import MissedSync
+from rodentdb.models import Rodent
 
-####################################################
-### RODENT #########################################
-####################################################
+
+# =============================================================================
+# RODENT
+# =============================================================================
 
 @receiver(post_save, sender=Rodent)
 def save_remote_rodent(sender, instance, created, **kwargs):
 
     if not created and not instance.public:
-
-        # for the case an object becomes private
-        # remove it from the remote database
+        # When an object becomes private remove it from the remote database
         try:
             remote_obj = RemoteRodent.objects.get(remote_id=instance.pk)
             remote_obj.delete()
@@ -31,7 +30,7 @@ def save_remote_rodent(sender, instance, created, **kwargs):
             MissedSync(
                 contenttype=ContentType.objects.get_for_model(Rodent),
                 object_id=instance.pk,
-                operation='D'
+                operation="D",
             ).save()
             print(e)
 
@@ -66,13 +65,9 @@ def save_remote_rodent(sender, instance, created, **kwargs):
             MissedSync(
                 contenttype=ContentType.objects.get_for_model(Rodent),
                 object_id=instance.pk,
-                operation='U'
+                operation="U",
             ).save()
             print(e)
-            #traceback.print_stack()
-
-
-
 
 
 @receiver(post_delete, sender=Rodent)
@@ -87,22 +82,20 @@ def delete_remote_rodent(sender, instance, **kwargs):
         MissedSync(
             contenttype=ContentType.objects.get_for_model(Rodent),
             object_id=instance.pk,
-            operation='D'
+            operation="D",
         ).save()
         print(e)
 
 
-####################################################
-### FLY ############################################
-####################################################
+# =============================================================================
+# FLY
+# =============================================================================
 
 @receiver(post_save, sender=Fly)
 def save_remote_fly(sender, instance, created, **kwargs):
 
     if not created and not instance.public:
-
-        # for the case an object becomes private
-        # remove it from the remote database
+        # When an object becomes private remove it from the remote database
         try:
             remote_obj = RemoteFly.objects.get(remote_id=instance.pk)
             remote_obj.delete()
@@ -112,10 +105,9 @@ def save_remote_fly(sender, instance, created, **kwargs):
             MissedSync(
                 contenttype=ContentType.objects.get_for_model(Fly),
                 object_id=instance.pk,
-                operation='D'
+                operation="D",
             ).save()
             print(e)
-
 
     elif instance.public:
 
@@ -140,7 +132,9 @@ def save_remote_fly(sender, instance, created, **kwargs):
             remote_obj.bal3 = instance.bal3
             remote_obj.chr4 = instance.chr4
             remote_obj.chru = instance.chru
-            remote_obj.special_husbandry_conditions = instance.special_husbandry_conditions
+            remote_obj.special_husbandry_conditions = (
+                instance.special_husbandry_conditions
+            )
             remote_obj.line_description = instance.line_description
 
             remote_obj.save()
@@ -148,7 +142,7 @@ def save_remote_fly(sender, instance, created, **kwargs):
             MissedSync(
                 contenttype=ContentType.objects.get_for_model(Fly),
                 object_id=instance.pk,
-                operation='U'
+                operation="U",
             ).save()
             print(e)
 
@@ -165,24 +159,20 @@ def delete_remote_fly(sender, instance, **kwargs):
         MissedSync(
             contenttype=ContentType.objects.get_for_model(Fly),
             object_id=instance.pk,
-            operation='D'
+            operation="D",
         ).save()
         print(e)
 
 
-
-
-####################################################
-### Fish ######################################
-####################################################
+# =============================================================================
+# Fish
+# =============================================================================
 
 @receiver(post_save, sender=Fish)
 def save_remote_Fish(sender, instance, created, **kwargs):
 
     if not created and not instance.public:
-
-        # for the case an object becomes private
-        # remove it from the remote database
+        # When an object becomes private remove it from the remote database
         try:
             remote_obj = RemoteFish.objects.get(remote_id=instance.pk)
             remote_obj.delete()
@@ -192,10 +182,9 @@ def save_remote_Fish(sender, instance, created, **kwargs):
             MissedSync(
                 contenttype=ContentType.objects.get_for_model(Fish),
                 object_id=instance.pk,
-                operation='D'
+                operation="D",
             ).save()
             print(e)
-            # traceback.print_stack()
 
     elif instance.public:
 
@@ -224,11 +213,9 @@ def save_remote_Fish(sender, instance, created, **kwargs):
             MissedSync(
                 contenttype=ContentType.objects.get_for_model(Fish),
                 object_id=instance.pk,
-                operation='U'
+                operation="U",
             ).save()
             print(e)
-            # traceback.print_stack()
-
 
 
 @receiver(post_delete, sender=Fish)
@@ -243,5 +230,5 @@ def delete_remote_Fish(sender, instance, **kwargs):
         MissedSync(
             contenttype=ContentType.objects.get_for_model(Fish),
             object_id=instance.pk,
-            operation='D'
+            operation="D",
         ).save()
