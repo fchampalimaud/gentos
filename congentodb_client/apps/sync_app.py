@@ -12,12 +12,12 @@ class SyncApp(ModelAdminWidget):
 
     LIST_DISPLAY = ["contenttype", "object_id", "operation", "created"]
 
+    LIST_HEADERS = ["Table", "Object ID", "Operation", "Created on"]
+
     LAYOUT_POSITION = conf.ORQUESTRA_HOME
     ORQUESTRA_MENU = "middle-left"
     ORQUESTRA_MENU_ORDER = 10
     ORQUESTRA_MENU_ICON = "database"
-
-    LIST_HEADERS = ["Table", "object id", "operation", "created on"]
 
     def __init__(self, *args, **kwargs):
 
@@ -29,12 +29,15 @@ class SyncApp(ModelAdminWidget):
 
         super().__init__(*args, **kwargs)
 
-        self._list.item_selection_changed_event = self.dummy
+        self._list.item_selection_changed_event = lambda: None
 
         self.formset = ["_sync_btn", "_list"]
 
-    def dummy(self):
-        pass
+    @classmethod
+    def has_permissions(cls, user):
+        if user.is_superuser or user.is_admin(cls.MODEL._meta.app_label):
+            return True
+        return False
 
     def get_queryset(self, request, queryset):
         return queryset.filter(committed=None)

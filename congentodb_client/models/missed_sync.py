@@ -1,57 +1,62 @@
-from django.db import models
 from django.contrib.contenttypes.models import ContentType
+from django.db import models
 from django.utils import timezone
 
-from users.models import User
-
-from flydb.models import Fly
 from notifications.tools import notify
+from users.models import User
+from flydb.models import Fly
 from rodentdb.models import Rodent
 from fishdb.models import Fish
 
-from ..models.fly import Fly as RemoteFly
-from ..models.rodent import Rodent as RemoteRodent
-from ..models.fish import Fish as RemoteFish
+from ..models import Fly as RemoteFly
+from ..models import Rodent as RemoteRodent
+from ..models import Fish as RemoteFish
+
 
 class MissedSync(models.Model):
 
-    OPERATIONS = (
-      ('D', 'Delete'),
-      ('U', 'Update')
+    OPERATIONS = (("D", "Delete"), ("U", "Update"))
+
+    id = models.AutoField("Id", primary_key=True)  # FIXME remove
+
+    contenttype = models.ForeignKey(
+        ContentType, on_delete=models.CASCADE, verbose_name="Table"
     )
+    object_id = models.IntegerField("Object id")
+    operation = models.CharField("Operation", max_length=1, choices=OPERATIONS)
+    committed = models.DateTimeField(
+        "Committed on", null=True, blank=True, default=None
+    )
+    created = models.DateTimeField("Created", auto_now_add=True)
+    modified = models.DateTimeField("Updated", auto_now=True)
 
-    id = models.AutoField('Id', primary_key=True)
-
-    contenttype = models.ForeignKey(ContentType, on_delete=models.CASCADE, verbose_name='Table')
-    object_id = models.IntegerField('Object id')
-    operation  = models.CharField('Operation', max_length=1, choices=OPERATIONS )
-    committed   = models.DateTimeField('Committed on', null=True, blank=True, default=None)
-    created   = models.DateTimeField('Created', auto_now_add=True)
-    modified  = models.DateTimeField('Updated', auto_now=True)
+    class Meta:
+        verbose_name = "FFF"
+        verbose_name_plural = "FFFs"
 
     def sync(self):
         model = self.contenttype.model_class()
         try:
             obj = model.objects.get(pk=self.object_id)
 
-            if self.operation == 'D':
+            if self.operation == "D":
                 obj.delete()
 
-            elif self.operation == 'U':
+            elif self.operation == "U":
                 obj.save()
 
         except model.DoesNotExist:
 
-            if self.operation=='D':
+            if self.operation == "D":
 
                 remote_model = None
 
-                if model==Fly:
+                if model == Fly:
                     remote_model = RemoteFly
                 elif model == Rodent:
                     remote_model = RemoteRodent
                 elif model == Fish:
-                   remote_model = RemoteFish
+                    remote_model = RemoteFish
 
                 if remote_model is not None:
                     try:
@@ -64,14 +69,13 @@ class MissedSync(models.Model):
         self.committed = timezone.now()
         self.save()
 
-
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
 
         for user in User.objects.filter(is_superuser=True):
             notify(
-                'CONGENTODB_SYNC_ERROR',
-                'Unable to sync with the Congento DB',
-                f'Unable to sync an object from the table [{self.contenttype}].',
-                user=user
+                "CONGENTODB_SYNC_ERROR",
+                "Unable to sync with the Congento DB",
+                f"Unable to sync an object from the table [{self.contenttype}].",
+                user=user,
             )
