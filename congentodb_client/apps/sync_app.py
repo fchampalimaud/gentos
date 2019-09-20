@@ -46,7 +46,6 @@ class SyncApp(ModelAdminWidget):
 
         for o in MissedSync.objects.filter(committed=None).order_by("created"):
             o.sync()
-            print(o)
 
         self.populate_list()
 
