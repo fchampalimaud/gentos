@@ -49,14 +49,14 @@ class MissedSync(models.Model):
 
             if self.operation == "D":
 
-                remote_model = None
-
                 if model == Fly:
                     remote_model = RemoteFly
                 elif model == Rodent:
                     remote_model = RemoteRodent
                 elif model == Fish:
                     remote_model = RemoteFish
+                else:
+                    remote_model = None
 
                 if remote_model is not None:
                     try:
@@ -67,15 +67,22 @@ class MissedSync(models.Model):
                         remote_obj.delete()
 
         self.committed = timezone.now()
-        self.save()
+        self.save(send_notification=False)
 
     def save(self, *args, **kwargs):
+        """A notification is sent to superusers on every save.
+        You can override this behavior passing the argument
+        `send_notification=False`.
+        """
+        send_notification = kwargs.pop("send_notification", True)
+
         super().save(*args, **kwargs)
 
-        for user in User.objects.filter(is_superuser=True):
-            notify(
-                "CONGENTODB_SYNC_ERROR",
-                "Unable to sync with the Congento DB",
-                f"Unable to sync an object from the table [{self.contenttype}].",
-                user=user,
-            )
+        if send_notification:
+            for user in User.objects.filter(is_superuser=True):
+                notify(
+                    "CONGENTODB_SYNC_ERROR",
+                    "Unable to sync with the Congento DB",
+                    f"Unable to sync an object from the table [{self.contenttype}].",
+                    user=user,
+                )
