@@ -13,12 +13,12 @@ class Fly(models.Model):
     id        = models.AutoField('Id', primary_key=True)
     created   = models.DateTimeField('Created', auto_now_add=True)
     modified  = models.DateTimeField('Updated', auto_now=True)
-    categories = models.TextField('Category', blank=True, null=True)
+    categories = models.TextField('Category', blank=True)
     species    = models.CharField('Species', max_length=80)
     origin = models.CharField(
         max_length=8, choices=ORIGINS, default=ORIGINS.center
     )
-    origin_center = models.CharField('Species', max_length=100, null=True, blank=True)
+    origin_center = models.CharField('Stock center', max_length=100, blank=True)
     genotype = models.CharField('Genotype', max_length=255, blank=True)
 
     chrx = models.CharField(max_length=60, verbose_name="Chromosome X", blank=True)
@@ -35,7 +35,7 @@ class Fly(models.Model):
     line_description = models.TextField(blank=True)
 
     remote_id = models.BigIntegerField('Remote id')
-    institution_name = models.CharField(max_length=255, blank=True, null=True)
+    institution_name = models.CharField(max_length=255, blank=True)
 
     # the only customisation that makes this model special
     class APIMeta:
