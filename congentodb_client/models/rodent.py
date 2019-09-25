@@ -30,7 +30,10 @@ class Rodent(models.Model):
 
     remote_id = models.BigIntegerField("Remote ID")
 
-    # the only customisation that makes this model special
+    class Meta:
+        verbose_name = "Rodent"
+        verbose_name_plural = "Rodents"
+
     class APIMeta:
         db_name = 'api'
         resource_path = 'rodent'

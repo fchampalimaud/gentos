@@ -35,7 +35,10 @@ class Fly(models.Model):
     remote_id = models.BigIntegerField("Remote ID")
     institution_name = models.CharField(max_length=255, blank=True)
 
-    # the only customisation that makes this model special
+    class Meta:
+        verbose_name = "Fly"
+        verbose_name_plural = "Flies"
+
     class APIMeta:
         db_name = "api"
         resource_path = "fly"

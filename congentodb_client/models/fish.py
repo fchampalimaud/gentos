@@ -3,11 +3,6 @@ from model_utils import Choices
 
 
 class Fish(models.Model):
-    class APIMeta:
-        db_name = "api"
-        resource_path = "fish"
-        resource_name = "fish"
-        resource_name_plural = "fishes"
 
     AVAILABILITIES = Choices(
         ("live", "Live"),
@@ -43,3 +38,13 @@ class Fish(models.Model):
     species_name = models.CharField(max_length=80)
 
     remote_id = models.BigIntegerField("Remote id")
+
+    class Meta:
+        verbose_name = "Fish"
+        verbose_name_plural = "Fish"
+
+    class APIMeta:
+        db_name = "api"
+        resource_path = "fish"
+        resource_name = "fish"
+        resource_name_plural = "fishes"

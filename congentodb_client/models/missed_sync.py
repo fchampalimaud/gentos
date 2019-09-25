@@ -31,8 +31,11 @@ class MissedSync(models.Model):
     modified = models.DateTimeField("Updated", auto_now=True)
 
     class Meta:
-        verbose_name = "FFF"
-        verbose_name_plural = "FFFs"
+        verbose_name = "Failed synchronization"
+        verbose_name_plural = "Failed synchronizations"
+
+    def __str__(self):
+        return f"{self.get_operation_display()} {self.contenttype.name.title()} #{self.object_id}"
 
     def sync(self):
         model = self.contenttype.model_class()
