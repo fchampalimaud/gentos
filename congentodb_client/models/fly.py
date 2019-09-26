@@ -10,7 +10,6 @@ class Fly(models.Model):
         ("external", "External Lab"),
     )
 
-    # id = models.AutoField("Id", primary_key=True)
     created = models.DateTimeField("Created", auto_now_add=True)
     modified = models.DateTimeField("Updated", auto_now=True)
     categories = models.TextField("Category", blank=True)
