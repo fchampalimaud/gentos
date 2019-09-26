@@ -159,6 +159,24 @@ class DatabaseAccess(models.Model):
         verbose_name_plural = "database accesses"
         unique_together = ("group", "animaldb")
 
+    def get_label_tag(self):
+        nbsp = "&nbsp" * 7  # hack to display the icon properly
+        db_icons_map = {
+            db[0]: f'<i class="large black congento-{db[0][:-2]} icon">{nbsp}</i>'
+            for db in get_installed_dbs()
+        }
+        level_icons_map = {
+            "admin": '<i class="grey star icon"></i>',
+            "basic": '<i class="grey pencil alternate icon"></i>',
+            "view": '<i class="grey eye icon"></i>',
+        }
+        html = (
+            '<div class="ui circular label">'
+            f"{db_icons_map[self.animaldb]}{level_icons_map[self.level]}"
+            "</div>"
+        )
+        return html
+
 
 class Group(models.Model):
     name = models.CharField(max_length=150, unique=True)
@@ -175,7 +193,8 @@ class Group(models.Model):
     users_count.short_description = "Users"
 
     def databases(self):
-        return ", ".join([access.animaldb for access in self.accesses.all()])
+        """Lists all databases a group has access to and its access level."""
+        return " ".join([f"{access.get_label_tag()}" for access in self.accesses.all()])
 
 
 class Membership(models.Model):
