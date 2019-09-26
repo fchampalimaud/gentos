@@ -15,11 +15,6 @@ class UserAdmin(auth_admin.UserAdmin):
     search_fields = ["name", "email"]
 
 
-@admin.register(models.Institution)
-class InstitutionAdmin(admin.ModelAdmin):
-    ...
-
-
 class DatabaseInline(admin.TabularInline):
     model = models.DatabaseAccess
     extra = 0

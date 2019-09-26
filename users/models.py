@@ -98,9 +98,6 @@ class User(AbstractUser):
             ).exists():
                 return "view"
 
-    def get_institution(self):
-        raise NotImplementedError
-
     def is_admin(self, animaldb):
         """
         animaldb: one of 'fishdb', 'flydb', 'rodentdb'
@@ -121,17 +118,6 @@ class User(AbstractUser):
     def is_facility_staff(self):
         """Returns True if the user has "admin" access level to any animal database."""
         return self.memberships.filter(group__accesses__level="admin").exists()
-
-
-class Institution(models.Model):
-    name = models.CharField(max_length=150)
-    short_name = models.CharField(max_length=20, blank=True)
-    logo = models.ImageField(
-        upload_to="institution", blank=True, help_text="recommended size 220x40 px"
-    )
-
-    def __str__(self):
-        return self.name
 
 
 class DatabaseAccess(models.Model):
@@ -181,7 +167,6 @@ class DatabaseAccess(models.Model):
 class Group(models.Model):
     name = models.CharField(max_length=150, unique=True)
     email = models.EmailField(blank=True)
-    institution = models.ForeignKey(to="users.Institution", on_delete=models.CASCADE)
     users = models.ManyToManyField(to=settings.AUTH_USER_MODEL, through="Membership")
 
     def __str__(self):

@@ -53,7 +53,7 @@ class MembershipInline(ModelAdminWidget):
 
 class GroupForm(ModelFormWidget):
     FIELDSETS = [
-        ("name", "institution"),
+        "name",
         segment("h3:Group Permissions", "DatabaseAccessInline"),
         segment("h3:Group Members", "MembershipInline"),
     ]

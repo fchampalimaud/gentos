@@ -33,7 +33,6 @@ class Fly(models.Model):
     line_description = models.TextField(blank=True)
 
     remote_id = models.BigIntegerField("Remote ID")
-    institution_name = models.CharField(max_length=255, blank=True)
 
     class Meta:
         verbose_name = "Fly"
