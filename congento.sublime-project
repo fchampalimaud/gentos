@@ -1,10 +1,13 @@
 {
-    "folders": [
-    {
-        "path": ".",
-        "folder_exclude_patterns": [
-            "*.egg-info",
-            "pip-wheel-metadata"
-        ]
-    }]
+	"folders":
+	[
+		{
+			"folder_exclude_patterns":
+			[
+				"*.egg-info",
+				"pip-wheel-metadata"
+			],
+			"path": "."
+		}
+	]
 }
