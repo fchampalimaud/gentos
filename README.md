@@ -1,6 +1,7 @@
-# cogento-client
+# gentos
 
-[Congento](https://congento.org/)
+Custom genetically modified organisms database developed to support the [Congento](https://congento.org/) network.
+
 
 
 ## Development
