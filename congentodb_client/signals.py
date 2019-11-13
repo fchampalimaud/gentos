@@ -1,5 +1,8 @@
+import logging
+
 from django.contrib.contenttypes.models import ContentType
 from django.db.models.signals import post_save, post_delete
+from django.db.utils import ConnectionDoesNotExist
 from django.dispatch import receiver
 
 from congentodb_client.models import Fish as RemoteFish
@@ -11,10 +14,13 @@ from fishdb.models import Fish
 from flydb.models import Fly
 from rodentdb.models import Rodent
 
+logger = logging.getLogger(__name__)
+
 
 # =============================================================================
 # RODENT
 # =============================================================================
+
 
 @receiver(post_save, sender=Rodent)
 def save_remote_rodent(sender, instance, created, **kwargs):
@@ -26,6 +32,8 @@ def save_remote_rodent(sender, instance, created, **kwargs):
             remote_obj.delete()
         except RemoteRodent.DoesNotExist:
             pass
+        except ConnectionDoesNotExist:
+            logger.debug("Could not connect to Congento API")
         except Exception as e:
             MissedSync(
                 contenttype=ContentType.objects.get_for_model(Rodent),
@@ -61,6 +69,8 @@ def save_remote_rodent(sender, instance, created, **kwargs):
 
             remote_obj.save()
 
+        except ConnectionDoesNotExist:
+            logger.debug("Could not connect to Congento API")
         except Exception as e:
             MissedSync(
                 contenttype=ContentType.objects.get_for_model(Rodent),
@@ -78,6 +88,8 @@ def delete_remote_rodent(sender, instance, **kwargs):
         remote_obj.delete()
     except RemoteRodent.DoesNotExist:
         pass
+    except ConnectionDoesNotExist:
+        logger.debug("Could not connect to Congento API")
     except Exception as e:
         MissedSync(
             contenttype=ContentType.objects.get_for_model(Rodent),
@@ -91,6 +103,7 @@ def delete_remote_rodent(sender, instance, **kwargs):
 # FLY
 # =============================================================================
 
+
 @receiver(post_save, sender=Fly)
 def save_remote_fly(sender, instance, created, **kwargs):
 
@@ -101,6 +114,8 @@ def save_remote_fly(sender, instance, created, **kwargs):
             remote_obj.delete()
         except RemoteFly.DoesNotExist:
             pass
+        except ConnectionDoesNotExist:
+            logger.debug("Could not connect to Congento API")
         except Exception as e:
             MissedSync(
                 contenttype=ContentType.objects.get_for_model(Fly),
@@ -138,6 +153,8 @@ def save_remote_fly(sender, instance, created, **kwargs):
             remote_obj.line_description = instance.line_description
 
             remote_obj.save()
+        except ConnectionDoesNotExist:
+            logger.debug("Could not connect to Congento API")
         except Exception as e:
             MissedSync(
                 contenttype=ContentType.objects.get_for_model(Fly),
@@ -155,6 +172,8 @@ def delete_remote_fly(sender, instance, **kwargs):
         remote_obj.delete()
     except RemoteFly.DoesNotExist:
         pass
+    except ConnectionDoesNotExist:
+        logger.debug("Could not connect to Congento API")
     except Exception as e:
         MissedSync(
             contenttype=ContentType.objects.get_for_model(Fly),
@@ -168,6 +187,7 @@ def delete_remote_fly(sender, instance, **kwargs):
 # FISH
 # =============================================================================
 
+
 @receiver(post_save, sender=Fish)
 def save_remote_Fish(sender, instance, created, **kwargs):
 
@@ -178,6 +198,8 @@ def save_remote_Fish(sender, instance, created, **kwargs):
             remote_obj.delete()
         except RemoteFish.DoesNotExist:
             pass
+        except ConnectionDoesNotExist:
+            logger.debug("Could not connect to Congento API")
         except Exception as e:
             MissedSync(
                 contenttype=ContentType.objects.get_for_model(Fish),
@@ -209,6 +231,8 @@ def save_remote_Fish(sender, instance, created, **kwargs):
             remote_obj.species_name = instance.species.name if instance.species else ""
 
             remote_obj.save()
+        except ConnectionDoesNotExist:
+            logger.debug("Could not connect to Congento API")
         except Exception as e:
             MissedSync(
                 contenttype=ContentType.objects.get_for_model(Fish),
