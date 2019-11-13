@@ -112,21 +112,11 @@ WSGI_APPLICATION = "conf.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": os.getenv("DATABASE_ENGINE", 'django.db.backends.sqlite3'),
-        "NAME": os.getenv("DATABASE_NAME", os.path.join(BASE_DIR, 'db.sqlite')),
-        "USER": os.getenv("DATABASE_USERNAME"),
-        "PASSWORD": os.getenv("DATABASE_PASSWORD"),
-        "HOST": os.getenv("DATABASE_HOST", default="localhost"),
-        "PORT": os.getenv("DATABASE_PORT", default=3306),
-    },
-    "api": {
-        "ENGINE": "rest_models.backend",
-        "NAME": os.getenv("DATABASE_API_NAME", 'http://localhost:8001/api'),
-        "USER": os.getenv("DATABASE_API_USERNAME", 'admin'),
-        "PASSWORD": os.getenv("DATABASE_API_PASSWORD", 'manager123'),
-        "AUTH": "rest_models.backend.auth.BasicAuth",
-        "PREVENT_DISTINCT": False,
-    },
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": os.getenv("MYSQL_DATABASE"),
+        "PASSWORD": os.getenv("MYSQL_ROOT_PASSWORD"),
+        "HOST": os.getenv("MYSQL_HOST", default="localhost"),
+    }
 }
 
 CONN_MAX_AGE = 60
@@ -221,3 +211,16 @@ DATABASE_ROUTERS = ["rest_models.router.RestModelRouter"]
 # confirm-users-app
 
 USER_EDIT_FORM = "users.apps.users.UserForm"
+
+
+# congento
+
+if os.getenv("CONGENTO_API_HOST"):
+    DATABASES["api"] = {
+        "ENGINE": "rest_models.backend",
+        "NAME": os.getenv("CONGENTO_API_HOST") + '/api',
+        "USER": os.getenv("CONGENTO_API_USERNAME"),
+        "PASSWORD": os.getenv("CONGENTO_API_PASSWORD"),
+        "AUTH": "rest_models.backend.auth.BasicAuth",
+        "PREVENT_DISTINCT": False,
+    }
