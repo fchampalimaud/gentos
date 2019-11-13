@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+if [ "${DEBUG:-False}" = "True" ]
+then
+    # Install missing dev dependencies
+    pipenv install --dev
+    echo "Starting DEVELOPMENT server"
+    pipenv run python manage.py migrate
+    pipenv run python manage.py runserver_plus 0.0.0.0:8000
+else
+    echo "Starting PRODUCTION server"
+    pipenv run python manage.py migrate
+    pipenv run python manage.py collectstatic --noinput
+    pipenv run gunicorn conf.wsgi --bind 0.0.0.0:5000 -w 4
+fi
+
+

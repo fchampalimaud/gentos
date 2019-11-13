@@ -1,0 +1,44 @@
+version: '3.6'
+
+volumes:
+  local_mysql_data: {}
+  local_mysql_data_backups: {}
+
+services:
+  django:
+    build: .
+    # restart: on-failure
+    image: congento_local_django
+    depends_on:
+      - mysql
+      - mailhog
+    volumes:
+      - .:/app
+    environment:
+      WAIT_HOSTS: mysql:3306
+    env_file:
+        - .env
+    ports:
+      - "8000:8000"
+    command: /start
+
+  mysql:
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    volumes:
+      - local_mysql_data:/var/lib/mysql
+      - local_mysql_data_backups:/backups
+    env_file:
+        - .env
+
+  # adminer:
+  #   image: adminer
+  #   restart: always
+  #   ports:
+  #     - 8080:8080
+
+  mailhog:
+    image: mailhog/mailhog:v1.0.0
+    ports:
+      - "8025:8025"

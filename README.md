@@ -3,6 +3,11 @@
 Custom genetically modified organisms database developed to support the [Congento](https://congento.org/) network.
 
 
+## Docker: configurations available
+
+| Compose file | Usage |
+| --- | --- |
+| `docker-compose.yml` | Launch a development server |
 
 ## Development
 
