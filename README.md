@@ -11,14 +11,12 @@ Custom genetically modified organisms database developed to support the [Congent
 
 ## Development
 
-Clone this repository and install all dependencies.
+Clone this repository and sync its submodules.
 
 ```bash
-git clone git@github.com:fchampalimaud/congento-client.git
+git clone git@github.com:fchampalimaud/gentos.git
 git pull --recurse-submodules
 git submodule update --init --recursive
-
-pipenv sync --dev
 ```
 
 Configure the development environment from the example provided
@@ -27,14 +25,18 @@ Configure the development environment from the example provided
 cp .env.example .env
 ```
 
-Setup MySQL database schema `congento` and apply the migrations.
+Build the image and launch it. To create an admin user or run any command inside the container, see the examples below.
 
 ```bash
-python manage.py migrate
+docker-compose build
+docker-compose up
+docker-compose exec django pipenv run python manage.py createsuperuser
 ```
 
-Use a local running instance of [MailHog](https://github.com/mailhog/MailHog)
-to test e-mails.
+| Service | Address |
+| --- | --- |
+| Django | http://localhost:8000 |
+| MailHog | http://localhost:8025 |
 
 
 ## Deployment
