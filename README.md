@@ -33,6 +33,12 @@ docker-compose up
 docker-compose exec django pipenv run python manage.py createsuperuser
 ```
 
+You may also load a fixture with initial data:
+
+```bash
+docker-compose exec django pipenv run python manage.py loaddata initial_data
+```
+
 | Service | Address |
 | --- | --- |
 | Django | http://localhost:8000 |
