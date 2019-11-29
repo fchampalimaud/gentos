@@ -225,3 +225,6 @@ if os.getenv("CONGENTO_API_HOST"):
         "AUTH": "rest_models.backend.auth.BasicAuth",
         "PREVENT_DISTINCT": False,
     }
+
+# django import_export related settings
+IMPORT_EXPORT_USE_TRANSACTIONS = True
