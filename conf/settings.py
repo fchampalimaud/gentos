@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     #"client.apps.ClientConfig",
     "users.apps.UsersConfig",
     # 3rd party apps
+    "import_export",
     "fishdb.apps.FishDBConfig",
     "flydb.apps.FlyDBConfig",
     "rodentdb.apps.RodentDBConfig",
