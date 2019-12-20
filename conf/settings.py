@@ -228,3 +228,6 @@ if os.getenv("CONGENTO_API_HOST"):
 
 # django import_export related settings
 IMPORT_EXPORT_USE_TRANSACTIONS = True
+
+# FlyDB
+PRINTER_SERVER_PORT = 1234
