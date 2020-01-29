@@ -6,6 +6,8 @@ from pyforms_web.web.middleware import PyFormsMiddleware
 
 
 class FormPermissionsMixin:
+    """Mix with ModelFormWidget to customize form behavior."""
+
     def get_readonly(self, default):
         user = PyFormsMiddleware.user()
         animaldb = self.model._meta.app_label
