@@ -5,6 +5,7 @@ from django.apps import apps
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import UserManager
+from django.core.exceptions import MultipleObjectsReturned
 from django.core.exceptions import ValidationError
 from django.db import models
 from model_utils import Choices
@@ -58,14 +59,48 @@ class User(AbstractUser):
         else:
             return self.username
 
-    def get_group(self):
-        # FIXME what if user has access through multiple groups?
-        if self.memberships.all().exists():
-            group = self.memberships.first().group
-            return group
-        return None
+    def get_group(self, animaldb: str = "", access_levels: list = []):
+        """
+        Returns a Group of which the user is a member.
+        If the user belongs to multiple groups, you must specify which
+        database and the kind of access in order to have just one result.
+        Raises `MultipleObjectsReturned` exception if multiple groups are returned.
+
+        NOTE: this will fail if a user belongs to multiple groups with
+              access to the same DB
+        """
+
+        memberships = self.memberships.all()
+
+        if animaldb:
+            memberships = memberships.filter(
+                group__accesses__animaldb=animaldb,
+                # group_accesses_level__in=["basic", "admin"],
+            )
+
+        if access_levels:
+            memberships = memberships.filter(group__accesses__level__in=access_levels)
+
+        if memberships.count() > 1:
+            groups = ",".join(memberships.values_list("group__name", flat=True))
+            err_msg = f"User <{self.name}> belongs to multiple groups: {groups}"
+            raise MultipleObjectsReturned(err_msg)
+
+        group = memberships.first().group
+        return group
 
     get_group.short_description = "Group"
+
+    def get_groups(self):
+        return Group.objects.filter(memberships__in=self.memberships.all())
+
+    get_groups.short_description = "Groups"
+
+    def get_groups_display(self):
+        """Lists all groups the user belongs to."""
+        return ", ".join([group.name for group in self.get_groups()])
+
+    get_groups_display.short_description = "Groups"
 
     def get_access_level(self, animaldb):
         """

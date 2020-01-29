@@ -82,7 +82,7 @@ class UsersListApp(ModelAdminWidget):
     LIST_DISPLAY = [
         "name",
         "email",
-        "get_group",
+        "get_groups_display",
         "is_active",
         "date_joined",
         "last_login",

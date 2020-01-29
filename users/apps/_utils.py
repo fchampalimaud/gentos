@@ -27,10 +27,14 @@ class FormPermissionsMixin:
 
         if obj._state.adding:
             user = PyFormsMiddleware.user()
-            access_level = user.get_access_level(self.model._meta.app_label)
+            app_label = self.model._meta.app_label
+            access_level = user.get_access_level(app_label)
 
             if access_level in ("manager", "basic"):
-                obj.ownership = user.get_group()
+                obj.ownership = user.get_group(
+                    animaldb=app_label,
+                    access_levels=["manager", "basic"],
+                )
 
             if access_level == "basic":
                 obj.maintainer = user
@@ -44,7 +48,7 @@ class FormPermissionsMixin:
         """
         if self.model_object:
             user = PyFormsMiddleware.user()
-            return self.model_object.ownership == user.get_group()
+            return self.model_object.ownership in user.get_groups()
         return False
 
 
