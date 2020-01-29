@@ -244,5 +244,8 @@ class Membership(models.Model):
         ),
     )
 
+    class Meta:
+        unique_together = (("user", "group"),)
+
     def __str__(self):
         return f"{self.user.get_display_name()} is a member of {self.group}"
