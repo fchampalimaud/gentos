@@ -34,8 +34,7 @@ class FormPermissionsMixin:
 
             if access_level in ("manager", "basic"):
                 obj.ownership = user.get_group(
-                    animaldb=app_label,
-                    access_levels=["manager", "basic"],
+                    animaldb=app_label, access_levels=["manager", "basic"]
                 )
 
             if access_level == "basic":

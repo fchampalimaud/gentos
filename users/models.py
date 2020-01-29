@@ -41,7 +41,9 @@ class User(AbstractUser):
     def clean(self):
         super().clean()
 
-        has_verified_email = EmailAddress.objects.filter(user=self, verified=True).exists()
+        has_verified_email = EmailAddress.objects.filter(
+            user=self, verified=True
+        ).exists()
         if self.is_active and not has_verified_email:
             raise ValidationError("User must verify his email first.")
 

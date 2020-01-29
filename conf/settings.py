@@ -44,7 +44,7 @@ MANAGERS = [
 INSTALLED_APPS = [
     # local apps
     "congentodb_client.apps.CongentoDBConfig",
-    #"client.apps.ClientConfig",
+    # "client.apps.ClientConfig",
     "users.apps.UsersConfig",
     # 3rd party apps
     "import_export",
@@ -142,7 +142,7 @@ AUTHENTICATION_BACKENDS = [
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
 
-AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = "users.User"
 
 LOGIN_URL = "/accounts/login/"
 LOGIN_REDIRECT_URL = "/"
@@ -170,9 +170,7 @@ MEDIA_URL = "/media/"
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "staticfiles"),
-]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "staticfiles")]
 
 
 # E-mail
@@ -192,16 +190,16 @@ SERVER_EMAIL = EMAIL_HOST_USER
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_EMAIL_SUBJECT_PREFIX = EMAIL_SUBJECT_PREFIX
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_USER_DISPLAY = "users.utils.user_display_name"
-ACCOUNT_FORMS = {'signup': 'users.forms.SignupForm'}
+ACCOUNT_FORMS = {"signup": "users.forms.SignupForm"}
 
-ACCOUNT_ADAPTER = 'users.adapters.AccountAdapter'
-SOCIALACCOUNT_ADAPTER = 'users.adapters.SocialAccountAdapter'
+ACCOUNT_ADAPTER = "users.adapters.AccountAdapter"
+SOCIALACCOUNT_ADAPTER = "users.adapters.SocialAccountAdapter"
 
 
 # django-rest-models
@@ -209,9 +207,19 @@ SOCIALACCOUNT_ADAPTER = 'users.adapters.SocialAccountAdapter'
 DATABASE_ROUTERS = ["rest_models.router.RestModelRouter"]
 
 
+# django-import-export
+
+IMPORT_EXPORT_USE_TRANSACTIONS = True
+
+
 # confirm-users-app
 
 USER_EDIT_FORM = "users.apps.users.UserForm"
+
+
+# flydb
+
+PRINTER_SERVER_PORT = 1234
 
 
 # congento
@@ -219,15 +227,9 @@ USER_EDIT_FORM = "users.apps.users.UserForm"
 if os.getenv("CONGENTO_API_HOST"):
     DATABASES["api"] = {
         "ENGINE": "rest_models.backend",
-        "NAME": os.getenv("CONGENTO_API_HOST") + '/api',
+        "NAME": os.getenv("CONGENTO_API_HOST") + "/api",
         "USER": os.getenv("CONGENTO_API_USERNAME"),
         "PASSWORD": os.getenv("CONGENTO_API_PASSWORD"),
         "AUTH": "rest_models.backend.auth.BasicAuth",
         "PREVENT_DISTINCT": False,
     }
-
-# django import_export related settings
-IMPORT_EXPORT_USE_TRANSACTIONS = True
-
-# FlyDB
-PRINTER_SERVER_PORT = 1234
