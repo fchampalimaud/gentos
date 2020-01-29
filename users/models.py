@@ -207,4 +207,4 @@ class Membership(models.Model):
     )
 
     def __str__(self):
-        return f"{self.user.get_short_name()} is a member of {self.group}"
+        return f"{self.user.get_display_name()} is a member of {self.group}"
