@@ -204,6 +204,9 @@ class Group(models.Model):
     email = models.EmailField(blank=True)
     users = models.ManyToManyField(to=settings.AUTH_USER_MODEL, through="Membership")
 
+    class Meta:
+        ordering = ["name"]
+
     def __str__(self):
         return self.name
 
