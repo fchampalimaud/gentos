@@ -67,18 +67,12 @@ class User(AbstractUser):
         If the user belongs to multiple groups, you must specify which
         database and the kind of access in order to have just one result.
         Raises `MultipleObjectsReturned` exception if multiple groups are returned.
-
-        NOTE: this will fail if a user belongs to multiple groups with
-              access to the same DB
         """
 
         memberships = self.memberships.all()
 
         if animaldb:
-            memberships = memberships.filter(
-                group__accesses__animaldb=animaldb,
-                # group_accesses_level__in=["basic", "admin"],
-            )
+            memberships = memberships.filter(group__accesses__animaldb=animaldb)
 
         if access_levels:
             memberships = memberships.filter(group__accesses__level__in=access_levels)
