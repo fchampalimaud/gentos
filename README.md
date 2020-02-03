@@ -47,7 +47,46 @@ docker-compose exec django pipenv run python manage.py loaddata initial_data
 
 ## Deployment
 
-...
+Clone this repository into the production machine and synchronize the submodules.
+
+```bash
+git clone --branch master --single-branch https://github.com/fchampalimaud/gentos.git
+cd gentos
+perl -i -p -e 's|git@(.*?):|https://\1/|g' .gitmodules
+```
+
+> **Note:** the `perl` script is required to change submodules URLs to `https://` schema.
+
+Pull the latest modifications and update the submodules.
+
+```bash
+git pull --recurse-submodules
+git submodule update --init --recursive
+```
+
+Configure environment variables in `.env`
+
+```bash
+cp .env.example .env
+```
+
+Launch the containers
+
+```bash
+docker-compose -f docker-compose.production.yml up --build -d
+```
+
+and create a superuser
+
+```bash
+docker-compose -f docker-compose.production.yml exec django pipenv run python manage.py createsuperuser
+```
+
+Log in to the `/admin` panel and configure
+
+- [ ] Admin account and email
+- [ ] Sites framework
+- [ ] Social Apps
 
 
 ## Configuration
