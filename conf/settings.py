@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import logging
 import os
+import socket
 
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
@@ -91,6 +92,8 @@ if DEBUG:
     INSTALLED_APPS += ["debug_toolbar", "django_extensions"]
     MIDDLEWARE.insert(0, "debug_toolbar.middleware.DebugToolbarMiddleware")
     INTERNAL_IPS = ["127.0.0.1"]
+    hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+    INTERNAL_IPS += [ip[:-1] + "1" for ip in ips]
 
 ROOT_URLCONF = "conf.urls"
 
