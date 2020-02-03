@@ -1,0 +1,48 @@
+version: '3.6'
+
+volumes:
+  production_mysql_data: {}
+  production_mysql_data_backups: {}
+
+services:
+  django:
+    build: .
+    restart: on-failure
+    image: gentos_production_django
+    depends_on:
+      - mysql
+    volumes:
+      - .:/app
+    environment:
+      WAIT_HOSTS: mysql:3306
+    env_file:
+      - .env
+    command: /start
+
+  mysql:
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    volumes:
+      - production_mysql_data:/var/lib/mysql
+      - production_mysql_data_backups:/backups
+    env_file:
+        - .env
+
+  # adminer:
+  #   image: adminer
+  #   restart: always
+  #   ports:
+  #     - 8080:8080
+
+  nginx:
+    image: nginx
+    restart: always
+    depends_on:
+      - django
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./staticfiles:/static
+      - ./media:/media
+    ports:
+      - "81:81"
