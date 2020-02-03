@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "088d69f34b17975f4a62c3bde644de109cd388eda80f7f6b9c944ade7a7404f2"
+            "sha256": "ff294e28e169eed30e1daeb00c9331cd2289e6c5cdd7eb2025ca264566393930"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -341,6 +341,14 @@
         "rodentdb": {
             "editable": true,
             "path": "./plugins/rodentdb"
+        },
+        "sentry-sdk": {
+            "hashes": [
+                "sha256:b06dd27391fd11fb32f84fe054e6a64736c469514a718a99fb5ce1dff95d6b28",
+                "sha256:e023da07cfbead3868e1e2ba994160517885a32dfd994fc455b118e37989479b"
+            ],
+            "index": "pypi",
+            "version": "==0.14.1"
         },
         "simplejson": {
             "hashes": [
