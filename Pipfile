@@ -18,7 +18,6 @@ gunicorn = "*"
 sentry-sdk = "*"
 django-rest-models = "~=1.8.5"
 django-import-export = "*"
-django-allauth = "<0.40.0"
 
 [dev-packages]
 django-debug-toolbar = "*"
