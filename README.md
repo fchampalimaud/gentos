@@ -82,6 +82,12 @@ and create a superuser
 docker-compose -f docker-compose.production.yml exec django pipenv run python manage.py createsuperuser
 ```
 
+and load the initial data fixtures
+
+```bash
+docker-compose -f docker-compose.production.yml exec django pipenv run python manage.py loaddata initial_data
+```
+
 Log in to the `/admin` panel and configure
 
 - [ ] Admin account and email
