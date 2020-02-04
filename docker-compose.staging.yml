@@ -45,4 +45,4 @@ services:
       - ./staticfiles:/static
       - ./media:/media
     ports:
-      - "81:81"
+      - "8080:8080"
