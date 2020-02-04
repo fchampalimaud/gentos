@@ -11,5 +11,5 @@ class CongentoDbLink(ExternalLinkBaseWidget):
     UID = "congentodb-link"
     TITLE = "Congento DB"
 
-    ORQUESTRA_URL = "https://congento.org/"
+    ORQUESTRA_URL = "https://database.congento.org/"
     ORQUESTRA_TARGET = "_blank"
