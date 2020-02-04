@@ -1,14 +1,14 @@
 version: '3.6'
 
 volumes:
-  production_mysql_data: {}
-  production_mysql_data_backups: {}
+  staging_mysql_data: {}
+  staging_mysql_data_backups: {}
 
 services:
   django:
     build: .
     restart: on-failure
-    image: gentos_production_django
+    image: gentos_staging_django
     depends_on:
       - mysql
     volumes:
@@ -24,8 +24,8 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     volumes:
-      - production_mysql_data:/var/lib/mysql
-      - production_mysql_data_backups:/backups
+      - staging_mysql_data:/var/lib/mysql
+      - staging_mysql_data_backups:/backups
     env_file:
         - .env
 
