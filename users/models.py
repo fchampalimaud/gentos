@@ -176,6 +176,9 @@ class DatabaseAccess(models.Model):
         verbose_name_plural = "database accesses"
         unique_together = ("group", "animaldb")
 
+    def __str__(self):
+        return self._meta.verbose_name.title()
+
     def get_label_tag(self):
         nbsp = "&nbsp" * 7  # hack to display the icon properly
         db_icons_map = {
