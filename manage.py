@@ -9,6 +9,13 @@ import dotenv
 def main():
     dotenv.read_dotenv()
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'conf.settings')
+
+    # Only attach the debugger when we're the Django that deals with requests
+    if os.environ.get('DJANGO_DEBUG', False):  # You can use django.conf settings.DEBUG
+        if os.environ.get('RUN_MAIN') or os.environ.get('WERKZEUG_RUN_MAIN'):
+            import ptvsd
+            ptvsd.enable_attach(address=('0.0.0.0', 5678))
+    
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
