@@ -8,6 +8,8 @@ urlpatterns = [
     path("pyforms/", include("pyforms_web.web.urls")),
     path("", include("orquestra.urls")),
     path("fly/", include("flydb.urls")),
+    path("rodent/", include("rodentdb.urls")),
+    path("fish/", include("fishdb.urls")),
     path("admin/", admin.site.urls),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
