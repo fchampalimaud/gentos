@@ -12,7 +12,7 @@ class UserAdmin(auth_admin.UserAdmin):
     add_form = auth_forms.UserCreationForm
     fieldsets = (("User", {"fields": ("name",)}),) + auth_admin.UserAdmin.fieldsets
     list_display = ["username", "name", "email", "is_superuser"]
-    search_fields = ["name", "email"]
+    search_fields = ["username", "name", "email"]
 
 
 class DatabaseInline(admin.TabularInline):
