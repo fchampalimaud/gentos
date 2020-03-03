@@ -15,7 +15,7 @@ else
     echo "Starting PRODUCTION server"
     pipenv run python manage.py migrate
     pipenv run python manage.py collectstatic --noinput
-    pipenv run gunicorn conf.wsgi --bind 0.0.0.0:5000 -w 4
+    pipenv run gunicorn conf.wsgi --bind 0.0.0.0:5000 -w 4 --timeout 60
 fi
 
 
