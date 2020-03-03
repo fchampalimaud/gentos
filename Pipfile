@@ -18,13 +18,13 @@ gunicorn = "*"
 sentry-sdk = "*"
 django-rest-models = "~=1.8.5"
 django-import-export = "*"
+django-extensions = "*"
 
 [dev-packages]
 ptvsd = "*"
 django-debug-toolbar = "*"
 black = "==19.3b0"
 flake8 = "*"
-django-extensions = "*"
 werkzeug = "*"
 
 [requires]
