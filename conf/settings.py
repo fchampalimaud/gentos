@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
+    "django_extensions",
     # django apps
     "django.contrib.admin",
     "django.contrib.auth",
@@ -89,7 +90,7 @@ MIDDLEWARE = [
 ]
 
 if DEBUG:
-    INSTALLED_APPS += ["debug_toolbar", "django_extensions"]
+    INSTALLED_APPS += ["debug_toolbar"]
     MIDDLEWARE.insert(0, "debug_toolbar.middleware.DebugToolbarMiddleware")
     INTERNAL_IPS = ["127.0.0.1"]
     hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
