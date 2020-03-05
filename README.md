@@ -29,7 +29,7 @@ Build the image and launch it. To create an admin user or run any command inside
 
 ```bash
 docker-compose build
-docker-compose up
+docker-compose up -d
 docker-compose exec django pipenv run python manage.py createsuperuser
 ```
 
