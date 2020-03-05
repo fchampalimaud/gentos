@@ -7,7 +7,8 @@ set -o nounset
 if [ "${DEBUG:-False}" = "True" ]
 then
     # Install missing dev dependencies
-    pipenv install --dev
+    echo "Installing DEVELOPMENT dependencies"
+    pipenv sync --dev --keep-outdated
     echo "Starting DEVELOPMENT server"
     pipenv run python manage.py migrate
     pipenv run python manage.py runserver_plus 0.0.0.0:8000
