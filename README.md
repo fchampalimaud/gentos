@@ -5,8 +5,8 @@ Custom genetically modified organisms database developed to support the [Congent
 
 ## Docker: configurations available
 
-| Compose file | Usage |
-| --- | --- |
+| Compose file         | Usage                       |
+| -------------------- | --------------------------- |
 | `docker-compose.yml` | Launch a development server |
 
 ## Development
@@ -39,9 +39,9 @@ You may also load a fixture with initial data:
 docker-compose exec django pipenv run python manage.py loaddata initial_data
 ```
 
-| Service | Address |
-| --- | --- |
-| Django | http://localhost:8000 |
+| Service | Address               |
+| ------- | --------------------- |
+| Django  | http://localhost:8000 |
 | MailHog | http://localhost:8025 |
 
 
