@@ -297,6 +297,18 @@ ACCOUNT_FORMS = {"signup": "users.forms.SignupForm"}
 ACCOUNT_ADAPTER = "users.adapters.AccountAdapter"
 SOCIALACCOUNT_ADAPTER = "users.adapters.SocialAccountAdapter"
 
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'offline',
+            'prompt': 'select_account',
+        }
+    }
+}
 
 # django-rest-models
 
