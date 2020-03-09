@@ -7,7 +7,7 @@ volumes:
 services:
   django:
     build: .
-    # restart: on-failure
+    restart: on-failure
     image: gentos_local_django
     depends_on:
       - mysql
