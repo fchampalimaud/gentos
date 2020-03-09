@@ -243,8 +243,8 @@ class Membership(models.Model):
         verbose_name="Manager",
         default=False,
         help_text=(
-            "Designates whether the user has permissions to manage all group "
-            "entries in the database."
+            "Designates whether the user has permissions to manage group info "
+            "and all group entries in the database."
         ),
     )
 
