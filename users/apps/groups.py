@@ -1,5 +1,6 @@
 from confapp import conf
 from pyforms_web.organizers import segment
+from pyforms_web.web.middleware import PyFormsMiddleware
 from pyforms_web.widgets.django import ModelAdminWidget
 from pyforms_web.widgets.django import ModelFormWidget
 
@@ -22,6 +23,16 @@ class DatabaseAccessInline(ModelAdminWidget):
 
     USE_DETAILS_TO_ADD = False  # required to have form in NEW_TAB
     USE_DETAILS_TO_EDIT = False  # required to have form in NEW_TAB
+
+    def has_add_permissions(self):
+        return self.has_update_permissions(obj=None)
+
+    def has_update_permissions(self, obj):
+        user = PyFormsMiddleware.user()
+        return user.is_superuser
+
+    def has_remove_permissions(self, obj):
+        return self.has_update_permissions(obj)
 
 
 class MembershipInlineForm(ModelFormWidget):
@@ -49,6 +60,16 @@ class MembershipInline(ModelAdminWidget):
 
     USE_DETAILS_TO_ADD = False  # required to have form in NEW_TAB
     USE_DETAILS_TO_EDIT = False  # required to have form in NEW_TAB
+
+    def has_add_permissions(self):
+        return self.has_update_permissions(obj=None)
+
+    def has_update_permissions(self, obj):
+        # user = PyFormsMiddleware.user()
+        return self.parent.has_update_permissions()
+
+    def has_remove_permissions(self, obj):
+        return self.has_update_permissions(obj)
 
 
 class GroupForm(ModelFormWidget):
@@ -95,5 +116,10 @@ class GroupsListApp(ModelAdminWidget):
         return False
 
     def has_update_permissions(self, obj):
-        # TODO allow update only their (admin) groups
+        user = PyFormsMiddleware.user()
+        if user.is_superuser or user.is_group_manager(obj):
+            return True
+        return False
+
+    def has_remove_permissions(self, obj):
         return False
