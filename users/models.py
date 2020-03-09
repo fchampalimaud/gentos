@@ -38,6 +38,11 @@ class User(AbstractUser):
     def __str__(self):
         return f"{self.name} <{self.email}>"
 
+    @staticmethod
+    def autocomplete_search_fields():
+        """Method required by PyForms toq autocomplete FKs fields."""
+        return ("name__icontains", "display_name__icontains")
+
     def clean(self):
         super().clean()
 
