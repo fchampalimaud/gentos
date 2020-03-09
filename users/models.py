@@ -214,6 +214,11 @@ class Group(models.Model):
     def __str__(self):
         return self.name
 
+    @staticmethod
+    def autocomplete_search_fields():
+        """Method required by PyForms toq autocomplete FKs fields."""
+        return ("name__icontains",)
+
     def users_count(self):
         return self.users.count()
 
